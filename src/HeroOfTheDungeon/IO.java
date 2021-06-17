@@ -22,7 +22,7 @@ public final class IO {
         System.out.println();
     }
 
-    /*public static void newGameIntroduction() { // heronun descriptionunu seçtir.
+    public static void newGameIntroduction() {
         System.out.println("------------------");
         System.out.println("CHOOSE A CHARACTER");
         System.out.println("------------------");
@@ -41,19 +41,19 @@ public final class IO {
         System.out.print("Choose Either Character: ");
         System.out.println();
         System.out.println();
-        System.out.println();
-    }*/
+    }
 
-    public static boolean displayPlayerStats(String name, String description, int maxHitPoints, int damage, int protection){
+    public static boolean displayPlayerStats(String name, String description, int maxHitPoints, Weapons weapon, Clothings clothing, Inventory inventory){
         System.out.println(name);
         System.out.println("-------");
         System.out.println(description);
         System.out.println();
         System.out.println("MAX HP: " + maxHitPoints);
         System.out.println();
-        System.out.println("ATTACK: " + damage);
+        System.out.println("WEAPON: " + weapon.getName());
         System.out.println();
-        System.out.println("DEFENSE(Scale:1-5): " + protection);
+        System.out.println("Clothing: " + clothing.getName());
+        System.out.println();
         System.out.println();
         System.out.println("ARE YOU SURE YOU WANT TO PLAY AS A "
                 + name.toUpperCase() + "? "

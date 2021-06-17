@@ -13,6 +13,11 @@ public class Inventory {
         this.curCapacity = curCapacity;
     }
 
+    public Inventory() {
+        this.items = null;
+        this.curCapacity = 0;
+    }
+
     public ArrayList<Item> getItems() {
         return items;
     }

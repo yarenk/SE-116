@@ -2,13 +2,13 @@ package HeroOfTheDungeon;
 
 import java.util.Random;
 
-public class Monster {
+public class Monster implements BattleMethods{
 
     private final String name;
     private final int maxHitPoints;
     private int hitPoints;
-    private int damage;
-    private int protection;
+    private Weapons weapon;
+    private Clothings clothing;
     private Inventory inventory;
     private static final Random rand = new Random();
 
@@ -16,8 +16,8 @@ public class Monster {
         this.name = name;
         this.maxHitPoints = maxHitPoints;
         this.hitPoints = maxHitPoints;
-        this.damage = weapon.getDamage();
-        this.protection = clothing.getProtection();
+        this.weapon = weapon;
+        this.clothing = clothing;
         this.inventory = inventory;
     }
 
@@ -93,8 +93,19 @@ public class Monster {
         return new Monster("Elder Dragon",(rand.nextInt(100) + 20),Weapons.newRandomWeapon(),Clothings.newRandomClothing(),Inventory.newInventory());
     }
 
+    @Override
+    public int attack() {
+        return weapon.getDamage() * weapon.getRange();
+    }
 
+    public int defend(Hero hero) {
+        int incomingAttack = hero.attack();
+        IO.monsterHitPointsMessage(incomingAttack, this);
+        hitPoints = (hitPoints * clothing.getProtection() > incomingAttack) ? hitPoints - incomingAttack : 0;
+        return hitPoints;
+    }
 
+    @Override
     public boolean isAlive() {
         return hitPoints > 0;
     }
@@ -115,20 +126,20 @@ public class Monster {
         this.hitPoints = hitPoints;
     }
 
-    public int getDamage() {
-        return damage;
+    public Weapons getWeapon() {
+        return weapon;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public void setWeapon(Weapons weapon) {
+        this.weapon = weapon;
     }
 
-    public int getProtection() {
-        return protection;
+    public Clothings getClothing() {
+        return clothing;
     }
 
-    public void setProtection(int protection) {
-        this.protection = protection;
+    public void setClothing(Clothings clothing) {
+        this.clothing = clothing;
     }
 
     public Inventory getInventory() {

@@ -1,11 +1,10 @@
 package HeroOfTheDungeon;
 
-import java.util.Random;
 
 public class Swords extends Weapons{
 
     private String swordType;
-    private static final Random rand = new Random();
+
 
     public Swords(String name, int weight, int value, int damage, int range, String swordType) {
         super(name, weight, value, damage, range);
@@ -20,18 +19,6 @@ public class Swords extends Weapons{
         this.swordType = swordType;
     }
 
-    @Override
-    public int attack() {
-        int random = rand.nextInt(5) + 1;
-        return getDamage() * getRange() * random;
-    }
-
-    @Override
-    public int defend(Hero hero, Monster monster) {
-        int incomingAttack = monster.getDamage();
-        hero.setHitPoints(hero.getHitPoints() * hero.getProtection() > incomingAttack ? hero.getHitPoints() - incomingAttack : 0);
-        return hero.getHitPoints();
-    }
 
     public static Swords newWeakSword() {
         return new Swords("Scissor Dagger",1,2,1,2,"Dagger");

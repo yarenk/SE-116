@@ -38,20 +38,18 @@ public class Game {
         Dungeon dungeon = new Dungeon();
         boolean status = false;
         do {
-            IO.newGameIntroduction();  // YORUM İÇİNDE OLDUĞU İÇİN KIRMIZI
+            IO.newGameIntroduction();
             String selection = USERINPUT.nextLine();
             switch (selection) {
                 case "1":
-                    status = IO.displayPlayerStats("Warrior", "A tough, "
-                                    + "well-rounded fighter with a balanced skillset.",
-                            100, 20, 30, 3, 0.10);
+                    status = IO.displayPlayerStats("Warrior","A tough, well-rounded fighter with a balanced skillset.",100,Swords.newWeakSword(),Clothings.newLightArmor(), new Inventory());
                     currHero = Hero.newWarrior();
 
                     break;
                 case "2":
                     status = IO.displayPlayerStats("Dueler", "A quick, nimble "
                             + "duelist with an aptitude for landing critical "
-                            + "attacks.", 80, 10, 50, 2, 0.18);
+                            + "attacks.", 100, Axes.newWeakAxe(), Clothings.newLightArmor(), new Inventory());
                     currHero = Hero.newDuelist();
 
                     break;

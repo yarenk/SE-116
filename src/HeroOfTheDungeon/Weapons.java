@@ -29,9 +29,6 @@ public abstract class Weapons extends Item{
         this.range = range;
     }
 
-    public abstract int attack();
-    public abstract int defend(Hero hero, Monster monster);
-    // saldırını metodunu Character saldıran, Character saldırılana uyarla
     public static Weapons newRandomWeapon() {
         Random rand = new Random();
         int random = rand.nextInt(17) + 1;
