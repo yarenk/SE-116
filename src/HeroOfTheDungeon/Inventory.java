@@ -1,30 +1,15 @@
 package HeroOfTheDungeon;
 
-import java.util.ArrayList;
-
-
 public class Inventory {
-    private static ArrayList<Item> items;
+    private Item[] items;
     private final int maxCapacity = 100;
     private int curCapacity;
 
-    public Inventory(ArrayList<Item> items, int curCapacity) {
-        this.items = items;
-        this.curCapacity = curCapacity;
-    }
-
     public Inventory() {
-        items = new ArrayList<>();
+        items = new Item[0];
         this.curCapacity = 0;
     }
 
-    public ArrayList<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
-    }
 
     public int getMaxCapacity() {
         return maxCapacity;
@@ -40,13 +25,22 @@ public class Inventory {
         this.curCapacity = curCapacity;
     }
 
-    public void add(Item item) {                                        // ex
-
+    public void add(Item item) {
         try {
             if ((getCurCapacity() + item.getWeight()) <= getMaxCapacity()) {
-                items.add(item);
-                setCurCapacity(item.getWeight() + getCurCapacity());
+                for (int i = 0; i < items.length; i++) {
+                    if (items[i] == null) {
+                        items[i] = item;
+                        return;
+                    }
+                }
+                int len = items.length;
+                Item[] newItems = new Item[len + 1];
+                System.arraycopy(items, 0, newItems, 0, len);
+                newItems[len] = item;
+                items = newItems;
             }
+            setCurCapacity(item.getWeight() + getCurCapacity());
         } catch (ArithmeticException e) {
             printItems();
         }
@@ -54,22 +48,100 @@ public class Inventory {
 
 
     public void remove(Item item) {
-        items.remove(item);
-        setCurCapacity(getCurCapacity() - item.getWeight());
+        for(int i = 0; i < items.length; i++) {
+            if(item == items[i]) {
+                items[i] = null;
+                return;
+            }
+            setCurCapacity(getCurCapacity() - item.getWeight());
+        }
+
     }
 
-    public void printItems() {
-        System.out.println("<<<<INVENTORY>>>>");
-        for (Item item : items)
-            item.display();
+    public Item remove(String itemName) {
+        // If they passed null, exit
+        if(itemName == null) {
+            return null;
+        }
+
+        // For each item in the room
+        for(int i = 0; i < items.length; i++) {
+            Item item = items[i];
+            // If it's null, don't bother checking and
+            // move on to the next item in the array
+            if(item == null) {
+                continue;
+            }
+            // If it's the same name, remove it
+            if(itemName.equalsIgnoreCase(item.getName())) {
+                items[i] = null;
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean contains(Item item) {
+        if(item == null) {
+            return false;
+        }
+        for(int i = 0; i < items.length; i++) {
+            if(item == items[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean contains(String itemName) {
+        if(itemName == null) {
+            return false;
+        }
+
+        for(int i = 0; i < items.length; i++) {
+            Item item = items[i];
+            if(item == null) {
+                continue;
+            }if(itemName.equalsIgnoreCase(item.getName())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    public void printItems(String outputFormatString) {
+        // For each item
+        for(int i = 0; i < items.length; i++) {
+            Item item = items[i];
+            // If it's null, don't bother printing and
+            // move onto the next item in the array
+            if(item == null) {
+                continue;
+            }
+            // Print the item
+            String itemName = item.getName();
+            System.out.printf(outputFormatString, itemName);
+        }
     }
 
     public boolean isEmpty() {
-        if (items.size() == 0) {
-            System.out.println("Inventory is empty.");
-            return false;
-        } else
-            return true;
+        for(int i = 0; i < items.length; i++) {
+            if(items[i] != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void setItems(Item[] items) {
+        this.items = items == null ? new Item[0] : items;
+    }
+
+    public Item[] getItems() {
+        return items;
     }
 
     public static Inventory newInventory() {

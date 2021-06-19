@@ -1,14 +1,12 @@
 package HeroOfTheDungeon;
 
-import java.util.Random;
-
 public class Rooms {
 
     private final String description;
     private Monster monster;
     private final int numberOfMonsters;
     private final int numberOfTownPeople;
-    private final boolean isStairsRoom;
+    private final boolean isLane;
     private Inventory inventory;
 
 
@@ -17,7 +15,7 @@ public class Rooms {
         this.monster = monster;
         this.numberOfMonsters = 1;
         this.numberOfTownPeople = 1;
-        this.isStairsRoom = false;
+        this.isLane = false;
         this.inventory = inventory;
     }
 
@@ -27,7 +25,7 @@ public class Rooms {
         this.monster = monster2;
         this.numberOfMonsters = 2;
         this.numberOfTownPeople = 2;
-        this.isStairsRoom = false;
+        this.isLane = false;
         this.inventory = inventory;
     }
 
@@ -38,7 +36,7 @@ public class Rooms {
         this.monster = monster3;
         this.numberOfMonsters = 3;
         this.numberOfTownPeople = 3;
-        this.isStairsRoom = true;
+        this.isLane = true;
         this.inventory = inventory;
     }
 
@@ -60,11 +58,6 @@ public class Rooms {
 
     public static Rooms newRoomInstance() {
 
-        if (numberOfMonsters == 1)
-            return new Rooms(description,Monster.newRandomMonster(),numberOfMonsters,numberOfTownPeople,isStairsRoom,Item.newRandomItem());
-        else
-            return new Rooms(description,Monster.newRandomMonster(),Monster.newRandomMonster(),numberOfMonsters,numberOfTownPeople,isStairsRoom,Item.newRandomItem());
-
     }
 
 
@@ -85,8 +78,8 @@ public class Rooms {
         return numberOfTownPeople;
     }
 
-    public boolean isStairsRoom() {
-        return isStairsRoom;
+    public boolean isLane() {
+        return isLane;
     }
 
     public Inventory getInventory() {

@@ -1,21 +1,61 @@
 package HeroOfTheDungeon;
 
-public final class Dungeon {
+import java.security.SecureRandom;
 
-    private static boolean nextLevel = false;
-    private static boolean previousLevel = false;
+public final class Dungeon {
+    static SecureRandom random = new SecureRandom();
+
+    private static boolean nextCorridor = false;
+    private static boolean previousCorridor = false;
     private static boolean previousRoom = false;
     private static boolean nextRoom = false;
+    private static boolean nextLevel = false;
+    private static boolean previousLevel = false;
+    private static boolean[][] booleanCoordinate;
+    private final static int m = random.nextInt(3);
+    private final static int n = random.nextInt(5);
+
 
     public static Rooms[][] newRandomDungeon(Hero hero) {
-        Rooms[][] dungeon = new Rooms[16][4];
+        int stairPositionX, stairPositionY;
+        stairPositionX = random.nextInt(m + 1);
+        stairPositionY = random.nextInt(n + 1);
+        Rooms[][] dungeon = new Rooms[m][n];
         for (int i = 0; i < dungeon.length; i++) {
             for (int j = 0; j < dungeon[i].length; j++) {
                 dungeon[i][j] = Rooms.newRoomInstance();
+                setBooleanCoordinate(isStair(booleanCoordinate,stairPositionX,stairPositionY));
             }
         }
         hero.setCurrRoom(dungeon[0][0]);
+        int i = 1;
+        while (i <= 15) {
+            newRandomDungeon(hero);
+            i++;
+        }
         return dungeon;
+    }
+
+    public static boolean[][] isStair(boolean[][] maze, int a, int b) {
+
+        int stairPositionX, stairPositionY;
+
+        SecureRandom random = new SecureRandom();
+        stairPositionX = random.nextInt(a);
+        stairPositionY = random.nextInt(b);
+
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze.length; j++) {
+
+                maze[i][j] = (i == stairPositionX && j == stairPositionY);
+            }
+        }
+        return maze;
+    }
+
+
+    public boolean levelExists(int x, int y) {
+        return (rowExists(x)) && (colExists(y));
     }
 
     public boolean roomExists(int x, int y) {
@@ -23,16 +63,16 @@ public final class Dungeon {
     }
 
     public boolean rowExists(int x){
-        return  (x >= 0) && (x <= 3);
+        return  (x >= 0) && (x <= m);
     }
 
     public boolean colExists(int y){
-        return  (y >= 0) && (y <= 15);
+        return  (y >= 0) && (y <= n);
     }
 
     public void playerMovement(Hero hero) {
-        nextLevel = roomExists(hero.getCurrX(), hero.getCurrY() + 1);
-        previousLevel = roomExists(hero.getCurrX(), hero.getCurrY() - 1);
+        nextCorridor = roomExists(hero.getCurrX(), hero.getCurrY() + 1);
+        previousCorridor = roomExists(hero.getCurrX(), hero.getCurrY() - 1);
         nextRoom = roomExists(hero.getCurrX() + 1, hero.getCurrY());
         previousRoom = roomExists(hero.getCurrX() - 1, hero.getCurrY());
         IO.movePlayer(hero);
@@ -54,12 +94,12 @@ public final class Dungeon {
         }
     }
 
-    public static boolean isNextLevel() {
-        return nextLevel;
+    public static boolean isNextCorridor() {
+        return nextCorridor;
     }
 
-    public static boolean isPreviousLevel() {
-        return previousLevel;
+    public static boolean isPreviousCorridor() {
+        return previousCorridor;
     }
 
     public static boolean isPreviousRoom() {
@@ -68,5 +108,21 @@ public final class Dungeon {
 
     public static boolean isNextRoom() {
         return nextRoom;
+    }
+
+    public static boolean isNextLevel() {
+        return nextLevel;
+    }
+
+    public static boolean isPreviousLevel() {
+        return previousLevel;
+    }
+
+    public static void setBooleanCoordinate(boolean[][] booleanCoordinate) {
+        Dungeon.booleanCoordinate = booleanCoordinate;
+    }
+
+    public static boolean[][] getBooleanCoordinate() {
+        return booleanCoordinate;
     }
 }

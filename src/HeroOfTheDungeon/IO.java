@@ -1,5 +1,8 @@
 package HeroOfTheDungeon;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
+
 public final class IO {
 
     public static void Welcome() {
@@ -81,11 +84,12 @@ public final class IO {
 
     public static void movePlayer(Hero hero) {
 
-        if (Dungeon.isNextLevel() && Rooms.newRoomInstance().isStairsRoom()) {
-            System.out.println("Next Level (nl)\n");
+
+        if (Dungeon.isNextCorridor() && Rooms.newRoomInstance().isLane()) {
+            System.out.println("Next Corridor (nc)\n");
         }
-        if (Dungeon.isPreviousLevel() && Rooms.newRoomInstance().isStairsRoom()) {
-            System.out.println("Previous Level (pl)\n");
+        if (Dungeon.isPreviousCorridor() && Rooms.newRoomInstance().isLane()) {
+            System.out.println("Previous Corridor (pc)\n");
         }
         if (Dungeon.isNextRoom()) {
             System.out.println("Next Room (nr)\n");
@@ -96,9 +100,9 @@ public final class IO {
 
         System.out.print("Where would you like to travel?: ");
         String selection = Game.USERINPUT.nextLine();
-        if (selection.equals("nl") && Dungeon.isNextLevel() && Rooms.newRoomInstance().isStairsRoom()) {
+        if (selection.equals("nc") && Dungeon.isNextCorridor() && Rooms.newRoomInstance().isLane()) {
             hero.setCurrY(hero.getCurrY() + 1);
-        } else if (selection.equals("pl") && Dungeon.isPreviousLevel() && Rooms.newRoomInstance().isStairsRoom()) {
+        } else if (selection.equals("pc") && Dungeon.isPreviousCorridor() && Rooms.newRoomInstance().isLane()) {
             hero.setCurrY(hero.getCurrY() - 1);
         } else if (selection.equals("nr") && Dungeon.isNextRoom()) {
             hero.setCurrX(hero.getCurrX() + 1);
@@ -135,15 +139,35 @@ public final class IO {
         if (!hero.isAlive()) {
             System.out.println("Your lifeless body hits the floor.  GAME OVER");
         } else if (!monster.isAlive()) {
+            SecureRandom rand = new SecureRandom();
+            int random = rand.nextInt(2);
+            if (random == 0){
+                hero.setNumberOfTownPeopleSaved(hero.getNumberOfTownPeopleSaved()+hero.getCurrRoom().getNumberOfTownPeople());
+                System.out.println(hero.getName() + " saved " + hero.getCurrRoom().getNumberOfTownPeople() + " people.");
+                TownPeople.heal(hero);
+            }
+            else {
+                hero.setNumberOfTownPeopleSaved(hero.getNumberOfTownPeopleSaved());
+                System.out.println("Monster killed the whole town people.");
+            }
+            System.out.println("Total people saved: " + hero.getNumberOfTownPeopleSaved());
             System.out.println("The monster has been defeated!");
             System.out.println("--------------------------------\n");
-            hero.setNumberOfTownPeopleSaved(hero.getNumberOfTownPeopleSaved()+hero.getCurrRoom().getNumberOfTownPeople());
-            System.out.println(hero.getName() + " saved " + hero.getCurrRoom().getNumberOfTownPeople() + " people.");
-            System.out.println("Total people saved: " + hero.getNumberOfTownPeopleSaved());
+
+            ArrayList<Inventory> loot = new ArrayList<>();
+            loot.add(monster.getInventory());
+            loot.add(Rooms.newRoomInstance().getInventory());
+            for (Inventory temp : loot) {
+                temp.printItems();
+            }
+            System.out.println("What items do you want to take?");
+            int i = 0;
+            while (!Game.USERINPUT.nextLine().equals("none")){
+
+            }
+
         }
 // LOOT AŞAMALARI YAPILACAK ENVANTER DEĞİŞİMİ VS.
-        // İHTİMAL DAHİLİNDE YA TOWN PEOPLELAR ÖLECEK YA DA HEROYU İYİLEŞTİRECEK
-        // KAHRAMANIN KURTARDIĞI TOWN PEOPLE SAYISI DEĞİŞECEK
     }
 
     public static void playerHitPointsMessage(int damage, Monster monster) {
