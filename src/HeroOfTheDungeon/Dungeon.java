@@ -2,10 +2,10 @@ package HeroOfTheDungeon;
 
 public final class Dungeon {
 
-    private static boolean northDirection = false;
-    private static boolean southDirection = false;
-    private static boolean westDirection = false;
-    private static boolean eastDirection = false;
+    private static boolean nextLevel = false;
+    private static boolean previousLevel = false;
+    private static boolean previousRoom = false;
+    private static boolean nextRoom = false;
 
     public static Rooms[][] newRandomDungeon(Hero hero) {
         Rooms[][] dungeon = new Rooms[16][4];
@@ -31,10 +31,10 @@ public final class Dungeon {
     }
 
     public void playerMovement(Hero hero) {
-        northDirection = roomExists(hero.getCurrX(), hero.getCurrY() + 1);
-        southDirection = roomExists(hero.getCurrX(), hero.getCurrY() - 1);
-        eastDirection = roomExists(hero.getCurrX() + 1, hero.getCurrY());
-        westDirection = roomExists(hero.getCurrX() - 1, hero.getCurrY());
+        nextLevel = roomExists(hero.getCurrX(), hero.getCurrY() + 1);
+        previousLevel = roomExists(hero.getCurrX(), hero.getCurrY() - 1);
+        nextRoom = roomExists(hero.getCurrX() + 1, hero.getCurrY());
+        previousRoom = roomExists(hero.getCurrX() - 1, hero.getCurrY());
         IO.movePlayer(hero);
 
     }
@@ -54,19 +54,19 @@ public final class Dungeon {
         }
     }
 
-    public static boolean isNorthDirection() {
-        return northDirection;
+    public static boolean isNextLevel() {
+        return nextLevel;
     }
 
-    public static boolean isSouthDirection() {
-        return southDirection;
+    public static boolean isPreviousLevel() {
+        return previousLevel;
     }
 
-    public static boolean isWestDirection() {
-        return westDirection;
+    public static boolean isPreviousRoom() {
+        return previousRoom;
     }
 
-    public static boolean isEastDirection() {
-        return eastDirection;
+    public static boolean isNextRoom() {
+        return nextRoom;
     }
 }

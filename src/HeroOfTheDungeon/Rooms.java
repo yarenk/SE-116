@@ -42,63 +42,24 @@ public class Rooms {
         this.inventory = inventory;
     }
 
+    public static Rooms newRaptor() {
+        return new Rooms();
+    }
+
+    public static Rooms newMiniKrug() {
+        return new Rooms();
+    }
+
+    public static Rooms newMurkWolf() {
+        return new Rooms();
+    }
+
+    public static Rooms newGhoul() {
+        return new Rooms();
+    }
+
     public static Rooms newRoomInstance() {
-        Random rand = new Random();
-        String description = null;
-        int numberOfMonsters = 0;
-        int numberOfTownPeople = 0;
-        boolean isStairsRoom = false;
-        int random = rand.nextInt(4) + 1;
-        switch (random) {
-            case 1:
-                description = "A dark corridor with creeping, animated vines.";
-                numberOfMonsters = 1;
-                numberOfTownPeople = 5;
-                isStairsRoom = true;
-                break;
-            case 2:
-                description = "A single lantern lays on the floor, illuminating"
-                        + " a skeleton of a past explorer. Two pairs of eyes "
-                        + "can be seen.";
-                numberOfMonsters = 1;
-                numberOfTownPeople = 10;
-                break;
-            case 3:
-                description = "A green, floral room full of massive plants.";
-                numberOfMonsters = 2;
-                numberOfTownPeople = 8;
-                isStairsRoom = true;
-                break;
-            case 4:
-                    description = "a giant dragon";
-                    numberOfMonsters = 2;
-                    numberOfTownPeople = 20;
-                    break;
-                /*case 5:
-                    description = "";
-                    numOfMonsters = 1;
-                    break;
-                case 6:
-                    description = "";
-                    numOfMonsters = 1;
-                    break;
-                case 7:
-                    description = "";
-                    numOfMonsters = 1;
-                    break;
-                case 8:
-                    description = "";
-                    numOfMonsters = 1;
-                    break;
-                case 9:
-                    description = "";
-                    numOfMonsters = 1;
-                    break;
-                case 10:
-                    description = "";
-                    numOfMonsters = 1;
-                    break;*/
-        }
+
         if (numberOfMonsters == 1)
             return new Rooms(description,Monster.newRandomMonster(),numberOfMonsters,numberOfTownPeople,isStairsRoom,Item.newRandomItem());
         else

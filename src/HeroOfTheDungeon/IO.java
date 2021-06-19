@@ -81,42 +81,41 @@ public final class IO {
 
     public static void movePlayer(Hero hero) {
 
-        if (Dungeon.isNorthDirection()) {
-            System.out.println("North (n)\n");
+        if (Dungeon.isNextLevel() && Rooms.newRoomInstance().isStairsRoom()) {
+            System.out.println("Next Level (nl)\n");
         }
-        if (Dungeon.isSouthDirection()) {
-            System.out.println("South (s)\n");
+        if (Dungeon.isPreviousLevel() && Rooms.newRoomInstance().isStairsRoom()) {
+            System.out.println("Previous Level (pl)\n");
         }
-        if (Dungeon.isEastDirection()) {
-            System.out.println("East (e)\n");
+        if (Dungeon.isNextRoom()) {
+            System.out.println("Next Room (nr)\n");
         }
-        if (Dungeon.isWestDirection()) {
-            System.out.println("West (w)\n");
+        if (Dungeon.isPreviousRoom()) {
+            System.out.println("Previous Room (pr)\n");
         }
 
         System.out.print("Where would you like to travel?: ");
         String selection = Game.USERINPUT.nextLine();
-        if (selection.equals("n") && Dungeon.isNorthDirection()) {
+        if (selection.equals("nl") && Dungeon.isNextLevel() && Rooms.newRoomInstance().isStairsRoom()) {
             hero.setCurrY(hero.getCurrY() + 1);
-        } else if (selection.equals("s") && Dungeon.isSouthDirection()) {
+        } else if (selection.equals("pl") && Dungeon.isPreviousLevel() && Rooms.newRoomInstance().isStairsRoom()) {
             hero.setCurrY(hero.getCurrY() - 1);
-        } else if (selection.equals("e") && Dungeon.isEastDirection()) {
+        } else if (selection.equals("nr") && Dungeon.isNextRoom()) {
             hero.setCurrX(hero.getCurrX() + 1);
-        } else if (selection.equals("w") && Dungeon.isWestDirection()) {
+        } else if (selection.equals("pr") && Dungeon.isPreviousRoom()) {
             hero.setCurrX(hero.getCurrX() - 1);
         }
 
     }
 
     public static void battleIntro(Hero hero, Rooms room) {
-        System.out.println("You arrive at Room [" + hero.getCurrX() + "]["
-                + hero.getCurrY() + "]");
+        System.out.println("You arrive at " + (hero.getCurrX() + 1) + ". Level "
+                + (hero.getCurrY() + 1) + ". Room");
         System.out.println("You enter the room and look around and see...");
         System.out.println(room.getDescription() + "\n\n");
         System.out.println("Number of monsters: " + room.getNumberOfMonsters());
         System.out.println("Number of town people: " + room.getNumberOfTownPeople());
-        System.out.println("Your fight with " + room.getMonster().getName()
-                + " begins.\n");
+        System.out.println("Your fight with " + room.getMonster().getName() + " begins.\n");
     }
 
     public static void battle(Hero hero, Monster monster) {
