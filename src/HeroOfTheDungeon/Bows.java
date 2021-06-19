@@ -21,14 +21,14 @@ public class Bows extends Weapons{
 
 
     public static Bows newWeakBow() {
-        return new Bows("Crossbow",1,2,3,2,"Short Bow");
+        return new Bows("Crossbow",1,2,2,4,"Short Bow");
     }
 
     public static Bows newBow() {
-        return new Bows("Phoenix Bow",2,4,2,4,"Long Bow");
+        return new Bows("Phoenix Bow",2,4,3,7,"Long Bow");
     }
 
     public static Bows newEpicBow() {
-        return new Bows("Zodiac Bow",4,8,4,8,"Composite Bow");
+        return new Bows("Zodiac Bow",4,8,4,10,"Composite Bow");
     }
 }

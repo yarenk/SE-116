@@ -21,14 +21,14 @@ public class Swords extends Weapons{
 
 
     public static Swords newWeakSword() {
-        return new Swords("Scissor Dagger",1,2,1,2,"Dagger");
+        return new Swords("Scissor Dagger",1,2,2,3,"Dagger");
     }
 
     public static Swords newSword() {
-        return new Swords("Lion Sword",2,4,2,4,"Short Sword");
+        return new Swords("Lion Sword",2,4,3,6,"Short Sword");
     }
 
     public static Swords newEpicSword() {
-        return new Swords("Kiyanite Sword",4,8,4,8,"Long Sword");
+        return new Swords("Kiyanite Sword",4,8,4,9,"Long Sword");
     }
 }

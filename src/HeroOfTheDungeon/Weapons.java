@@ -62,4 +62,11 @@ public abstract class Weapons extends Item{
         }
         return weapon;
     }
+
+    @Override
+    public void display() {
+        super.display();
+        System.out.println("Weapon Damage: " + getDamage());
+        System.out.println("Weapon Range: " + getRange());
+    }
 }

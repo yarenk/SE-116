@@ -58,39 +58,39 @@ public class Monster implements BattleMethods{
     }
 
     public static Monster newRaptor() {
-        return new Monster("Raptor",(rand.nextInt(100) + 20),Weapons.newRandomWeapon(),Clothings.newRandomClothing(),Inventory.newInventory());
+        return new Monster("Raptor",20,Swords.newWeakSword(),Clothings.newLightArmor(),Inventory.newInventory());
     }
 
     public static Monster newMiniKrug() {
-        return new Monster("Mini Krug",(rand.nextInt(100) + 20),Weapons.newRandomWeapon(),Clothings.newRandomClothing(),Inventory.newInventory());
+        return new Monster("Mini Krug",25,Axes.newWeakAxe(),Clothings.newLightArmor(),Inventory.newInventory());
     }
 
     public static Monster newMurkWolf() {
-        return new Monster("Murk Wolf",(rand.nextInt(100) + 20),Weapons.newRandomWeapon(),Clothings.newRandomClothing(),Inventory.newInventory());
+        return new Monster("Murk Wolf",30,Bows.newWeakBow(),Clothings.newLightArmor(),Inventory.newInventory());
     }
 
     public static Monster newGhoul() {
-        return new Monster("Ghoul",(rand.nextInt(100) + 20),Weapons.newRandomWeapon(),Clothings.newRandomClothing(),Inventory.newInventory());
+        return new Monster("Ghoul",35,Swords.newSword(),Clothings.newMediumArmor(),Inventory.newInventory());
     }
 
     public static Monster newGromp() {
-        return new Monster("Gromp",(rand.nextInt(100) + 20),Weapons.newRandomWeapon(),Clothings.newRandomClothing(),Inventory.newInventory());
+        return new Monster("Gromp",40,Axes.newAxe(),Clothings.newMediumArmor(),Inventory.newInventory());
     }
 
     public static Monster newRiftHerald() {
-        return new Monster("Rift Herald",(rand.nextInt(100) + 20),Weapons.newRandomWeapon(),Clothings.newRandomClothing(), Inventory.newInventory());
+        return new Monster("Rift Herald",45,Bows.newBow(),Clothings.newMediumArmor(), Inventory.newInventory());
     }
 
     public static Monster newInfernalDrake() {
-        return new Monster("Infernal Drake",(rand.nextInt(100) + 20),Weapons.newRandomWeapon(),Clothings.newRandomClothing(),Inventory.newInventory());
+        return new Monster("Infernal Drake",50,Swords.newEpicSword(),Clothings.newHeavyArmor(),Inventory.newInventory());
     }
 
     public static Monster newBaronNashor() {
-        return new Monster("Baron Nashor",(rand.nextInt(100) + 20),Weapons.newRandomWeapon(),Clothings.newRandomClothing(),Inventory.newInventory());
+        return new Monster("Baron Nashor",55,Axes.newEpicAxe(),Clothings.newHeavyArmor(),Inventory.newInventory());
     }
 
     public static Monster newElderDragon() {
-        return new Monster("Elder Dragon",(rand.nextInt(100) + 20),Weapons.newRandomWeapon(),Clothings.newRandomClothing(),Inventory.newInventory());
+        return new Monster("Elder Dragon",60,Bows.newEpicBow(),Clothings.newHeavyArmor(),Inventory.newInventory());
     }
 
     @Override
@@ -99,10 +99,14 @@ public class Monster implements BattleMethods{
     }
 
     public int defend(Hero hero) {
-        int incomingAttack = hero.attack();
-        IO.monsterHitPointsMessage(incomingAttack, this);
-        setHitPoints((hitPoints * clothing.getProtection() > incomingAttack) ? hitPoints - incomingAttack : 0);
-        return hitPoints;
+        int incomingAttack = hero.attack() - getClothing().getProtection();
+        IO.monsterHitPointsMessage(incomingAttack,this);
+            if (getHitPoints()> incomingAttack)
+                setHitPoints(getHitPoints() - incomingAttack);
+            else
+                setHitPoints(0);
+
+            return getHitPoints();
     }
 
     @Override

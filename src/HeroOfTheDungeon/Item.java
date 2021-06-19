@@ -83,7 +83,6 @@ public class Item {
     }
 
     public void display() {
-        System.out.println("<<<<<<<<ITEM>>>>>>>>");
         System.out.println("Name of Item: " + getName());
         System.out.println("Weight: " + getWeight());
         System.out.println("Value: " + getValue());

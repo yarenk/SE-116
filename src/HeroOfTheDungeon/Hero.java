@@ -29,13 +29,19 @@ public class Hero implements BattleMethods{
     }
 
     public static Hero newWarrior() {
-        return new Hero("Warrior", "A tough, well-rounded fighter with"
-                + " a balanced skillset.", 100, 100, Swords.newWeakSword(), Clothings.newLightArmor(), Rooms.newRoomInstance(),Inventory.newInventory());
+        return new Hero("Warrior", "You start with a weak weapon but with a high health value.", 150, 110, Swords.newWeakSword(), Clothings.newLightArmor(), Rooms.newRoomInstance(),new Inventory());
     }
 
     public static Hero newDuelist() {
-        return new Hero("Duelist", "A quick, nimble duelist with an"
-                + " aptitude for landing critical attacks.", 100, 100, Axes.newWeakAxe(), Clothings.newLightArmor(), Rooms.newRoomInstance(),Inventory.newInventory());
+        return new Hero("Duelist", "You start with a balanced weapon and health value.", 150, 100, Axes.newWeakAxe(), Clothings.newLightArmor(), Rooms.newRoomInstance(),new Inventory());
+    }
+
+    public static Hero newNinja() {
+        return new Hero("Ninja","You start with a powerful weapon and low health to begin with.",150,90,Bows.newWeakBow(),Clothings.newLightArmor(),Rooms.newRoomInstance(),new Inventory());
+    }
+
+    public int calculateValue() {
+        return weapon.getValue() + clothing.getValue();
     }
 
     @Override
@@ -44,10 +50,15 @@ public class Hero implements BattleMethods{
     }
 
     public int defend(Monster monster) {
-        int incomingAttack = monster.attack();
+        int incomingAttack = monster.attack() - getClothing().getProtection();
         IO.playerHitPointsMessage(incomingAttack, monster);
-        setHitPoints((hitPoints * clothing.getProtection() > incomingAttack) ? hitPoints - incomingAttack : 0);
-        return hitPoints;
+
+            if (getHitPoints() > incomingAttack)
+                setHitPoints(getHitPoints() - incomingAttack);
+            else
+                setHitPoints(0);
+
+        return getHitPoints();
     }
 
     @Override

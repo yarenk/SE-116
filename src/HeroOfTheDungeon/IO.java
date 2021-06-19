@@ -27,15 +27,17 @@ public final class IO {
         System.out.println("CHOOSE A CHARACTER");
         System.out.println("------------------");
         System.out.println();
-        System.out.println("1. WARRI0R");
+        System.out.println("1. WARRIOR");
         System.out.println("----------");
-        System.out.println("A tough, well-rounded fighter with"
-                + " a balanced skillset.");
+        System.out.println("You start with a weak weapon but with a high health value.");
         System.out.println();
         System.out.println("2. DUELIST");
         System.out.println("----------");
-        System.out.println("A quick, nimble duelist with an"
-                + "aptitude for landing critical attacks.");
+        System.out.println("You start with a balanced weapon and health value.");
+        System.out.println();
+        System.out.println("3. NINJA");
+        System.out.println("----------");
+        System.out.println("You start with a powerful weapon and low health to begin with.");
         System.out.println();
         System.out.println("________________________");
         System.out.print("Choose Either Character: ");
@@ -43,20 +45,28 @@ public final class IO {
         System.out.println();
     }
 
-    public static boolean displayPlayerStats(String name, String description, int maxHitPoints, Weapons weapon, Clothings clothing, Inventory inventory){
-        System.out.println(name);
+    public static boolean displayPlayerStats(Hero hero){
+        System.out.println(hero.getName());
         System.out.println("-------");
-        System.out.println(description);
+        System.out.println(hero.getDescription());
         System.out.println();
-        System.out.println("MAX HP: " + maxHitPoints);
+        System.out.println("MAX HP: " + hero.getMaxHitPoints());
         System.out.println();
-        System.out.println("WEAPON: " + weapon.getName());
+        System.out.println("HP: " + hero.getHitPoints());
         System.out.println();
-        System.out.println("Clothing: " + clothing.getName());
+        hero.getWeapon().display();
         System.out.println();
+        hero.getClothing().display();
+        System.out.println();
+        if (hero.getInventory().isEmpty() == true)
+            hero.getInventory().printItems();
+        System.out.println();
+        System.out.println("Total people saved: " + hero.getNumberOfTownPeopleSaved());
+        System.out.println();
+        System.out.println("Value of collected items: " + hero.calculateValue());
         System.out.println();
         System.out.println("ARE YOU SURE YOU WANT TO PLAY AS A "
-                + name.toUpperCase() + "? "
+                + hero.getName().toUpperCase() + "? "
                 + "(y/n)");
         System.out.println();
         System.out.println();
@@ -134,6 +144,9 @@ public final class IO {
         } else if (!monster.isAlive()) {
             System.out.println("The monster has been defeated!");
             System.out.println("--------------------------------\n");
+            hero.setNumberOfTownPeopleSaved(hero.getNumberOfTownPeopleSaved()+hero.getCurrRoom().getNumberOfTownPeople());
+            System.out.println(hero.getName() + " saved " + hero.getCurrRoom().getNumberOfTownPeople() + " people.");
+            System.out.println("Total people saved: " + hero.getNumberOfTownPeopleSaved());
         }
 // LOOT AŞAMALARI YAPILACAK ENVANTER DEĞİŞİMİ VS.
         // İHTİMAL DAHİLİNDE YA TOWN PEOPLELAR ÖLECEK YA DA HEROYU İYİLEŞTİRECEK

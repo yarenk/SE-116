@@ -59,6 +59,7 @@ public class Inventory {
     }
 
     public void printItems() {
+        System.out.println("<<<<INVENTORY>>>>");
         for (Item item : items)
             item.display();
     }

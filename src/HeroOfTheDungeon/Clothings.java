@@ -29,10 +29,10 @@ public class Clothings extends Item{
         Random rand = new Random();
         int random = rand.nextInt(10) + 1;
         Clothings clothings = null;
-        if (random >= 1 && random <= 6) {
+        if (random <= 6) {
             clothings = newLightArmor();
         }
-        else if (random >= 6 & random <= 9) {
+        if (random >= 6 & random <= 9) {
             clothings = newMediumArmor();
         }
         else {
@@ -57,5 +57,9 @@ public class Clothings extends Item{
         return new Clothings("Chain Mail",55,75,6,"Chain Armor");
     }
 
-
+    @Override
+    public void display() {
+        super.display();
+        System.out.println("Protection: " + getProtection());
+    }
 }
