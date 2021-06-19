@@ -21,7 +21,60 @@ public class Monster implements BattleMethods{
         this.inventory = inventory;
     }
 
-    public static Monster newRandomMonster() {
+    public static Monster newRandomEasyMonster() {
+        int random = rand.nextInt(3) + 1;
+        Monster monster = null;
+        switch (random) {
+            case 1:
+                monster = newRaptor();
+                break;
+            case 2:
+                monster = newMiniKrug();
+                break;
+            case 3:
+                monster = newMurkWolf();
+                break;
+        }
+        return monster;
+    }
+
+    public static Monster newRandomMediumMonster() {
+        int random = rand.nextInt(3) + 1;
+        Monster monster = null;
+        switch (random) {
+            case 1:
+                monster = newGhoul();
+                break;
+            case 2:
+                monster = newGromp();
+                break;
+            case 3:
+                monster = newRiftHerald();
+                break;
+        }
+        return monster;
+    }
+
+    public static Monster newRandomHardMonster() {
+        int random = rand.nextInt(3) + 1;
+        Monster monster = null;
+        switch (random) {
+            case 1:
+                monster = newInfernalDrake();
+                break;
+            case 2:
+                monster = newBaronNashor();
+                break;
+            case 3:
+                monster = newElderDragon();
+                break;
+        }
+        return monster;
+    }
+
+
+
+    /*public static Monster newRandomMonster() {
         int random = rand.nextInt(9) + 1;
         Monster monster = null;
         switch (random) {
@@ -55,7 +108,7 @@ public class Monster implements BattleMethods{
         }
 
         return monster;
-    }
+    }*/
 
     public static Monster newRaptor() {
         return new Monster("Raptor",20,Swords.newWeakSword(),Clothings.newLightArmor(),Inventory.newInventory());

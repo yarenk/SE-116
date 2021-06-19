@@ -9,25 +9,37 @@ public class Rooms {
     private final int numberOfMonsters;
     private final int numberOfTownPeople;
     private final boolean isStairsRoom;
-    private Item item;
+    private Inventory inventory;
 
-    public Rooms(String description, Monster monster, int numberOfMonsters, int numberOfTownPeople, boolean isStairsRoom, Item item){
+
+    public Rooms(String description, Monster monster, Inventory inventory) {
         this.description = description;
         this.monster = monster;
-        this.numberOfMonsters = numberOfMonsters;
-        this.numberOfTownPeople = numberOfTownPeople;
-        this.isStairsRoom = isStairsRoom;
-        this.item = item;
+        this.numberOfMonsters = 1;
+        this.numberOfTownPeople = 1;
+        this.isStairsRoom = false;
+        this.inventory = inventory;
     }
 
-    public Rooms(String description, Monster monster1, Monster monster2, int numberOfMonsters, int numberOfTownPeople, boolean isStairsRoom, Item item){
+    public Rooms(String description, Monster monster1, Monster monster2, Inventory inventory) {
         this.description = description;
         this.monster = monster1;
         this.monster = monster2;
-        this.numberOfMonsters = numberOfMonsters;
-        this.numberOfTownPeople = numberOfTownPeople;
-        this.isStairsRoom = isStairsRoom;
-        this.item = item;
+        this.numberOfMonsters = 2;
+        this.numberOfTownPeople = 2;
+        this.isStairsRoom = false;
+        this.inventory = inventory;
+    }
+
+    public Rooms(String description, Monster monster1, Monster monster2, Monster monster3, Inventory inventory) {
+        this.description = description;
+        this.monster = monster1;
+        this.monster = monster2;
+        this.monster = monster3;
+        this.numberOfMonsters = 3;
+        this.numberOfTownPeople = 3;
+        this.isStairsRoom = true;
+        this.inventory = inventory;
     }
 
     public static Rooms newRoomInstance() {
@@ -116,12 +128,12 @@ public class Rooms {
         return isStairsRoom;
     }
 
-    public Item getItem() {
-        return item;
+    public Inventory getInventory() {
+        return inventory;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
     public Monster getMonster() {

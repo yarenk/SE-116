@@ -30,7 +30,7 @@ public class Game {
                     System.exit(0);
             }
 
-        } while (status == false);
+        } while (!status);
 
     }
 
@@ -53,7 +53,7 @@ public class Game {
                     currHero = Hero.newNinja();
                     status = IO.displayPlayerStats(currHero);
             }
-        } while (status == false);
+        } while (!status);
 
         currDungeon = Dungeon.newRandomDungeon(currHero);
         dungeon.dungeonLogic(currHero, currDungeon);

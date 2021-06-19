@@ -31,14 +31,10 @@ public final class Dungeon {
     }
 
     public void playerMovement(Hero hero) {
-        northDirection = roomExists(hero.getCurrX(), hero.getCurrY()
-                + 1);
-        southDirection = roomExists(hero.getCurrX(), hero.getCurrY()
-                - 1);
-        eastDirection = roomExists(hero.getCurrX() + 1,
-                hero.getCurrY());
-        westDirection = roomExists(hero.getCurrX() - 1,
-                hero.getCurrY());
+        northDirection = roomExists(hero.getCurrX(), hero.getCurrY() + 1);
+        southDirection = roomExists(hero.getCurrX(), hero.getCurrY() - 1);
+        eastDirection = roomExists(hero.getCurrX() + 1, hero.getCurrY());
+        westDirection = roomExists(hero.getCurrX() - 1, hero.getCurrY());
         IO.movePlayer(hero);
 
     }

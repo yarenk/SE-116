@@ -1,7 +1,5 @@
 package HeroOfTheDungeon;
 
-import java.io.*;
-
 public final class IO {
 
     public static void Welcome() {
@@ -58,7 +56,7 @@ public final class IO {
         System.out.println();
         hero.getClothing().display();
         System.out.println();
-        if (hero.getInventory().isEmpty() == true)
+        if (hero.getInventory().isEmpty())
             hero.getInventory().printItems();
         System.out.println();
         System.out.println("Total people saved: " + hero.getNumberOfTownPeopleSaved());
@@ -70,11 +68,7 @@ public final class IO {
                 + "(y/n)");
         System.out.println();
         System.out.println();
-        if (Game.USERINPUT.nextLine().equals("y")) {
-            return true;
-        } else {
-            return false;
-        }
+        return Game.USERINPUT.nextLine().equals("y");
     }
 
     public static void credits() {
@@ -87,16 +81,16 @@ public final class IO {
 
     public static void movePlayer(Hero hero) {
 
-        if (Dungeon.isNorthDirection() == true) {
+        if (Dungeon.isNorthDirection()) {
             System.out.println("North (n)\n");
         }
-        if (Dungeon.isSouthDirection() == true) {
+        if (Dungeon.isSouthDirection()) {
             System.out.println("South (s)\n");
         }
-        if (Dungeon.isEastDirection() == true) {
+        if (Dungeon.isEastDirection()) {
             System.out.println("East (e)\n");
         }
-        if (Dungeon.isWestDirection() == true) {
+        if (Dungeon.isWestDirection()) {
             System.out.println("West (w)\n");
         }
 
