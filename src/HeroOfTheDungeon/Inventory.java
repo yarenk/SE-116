@@ -14,7 +14,7 @@ public class Inventory {
     }
 
     public Inventory() {
-        this.items = null;
+        items = new ArrayList<>();
         this.curCapacity = 0;
     }
 
@@ -72,10 +72,11 @@ public class Inventory {
     }
 
     public static Inventory newInventory() {
-        items.add(Weapons.newRandomWeapon());
-        items.add(Clothings.newRandomClothing());
-        items.add(Item.newRandomItem());
-        return new Inventory(items,(items.get(0).getWeight() + items.get(1).getWeight() + items.get(2).getWeight()));
+        Inventory inventory = new Inventory();
+        inventory.add(Weapons.newRandomWeapon());
+        inventory.add(Clothings.newRandomClothing());
+        inventory.add(Item.newRandomItem());
+        return inventory;
     }
 
 

@@ -21,7 +21,7 @@ public class Axes extends Weapons{
 
 
     public static Axes newWeakAxe() {
-        return new Axes("Hand Axe",1,2,1,2,"Small Axe");
+        return new Axes("Hand Axe",1,2,2,2,"Small Axe");
     }
 
     public static Axes newAxe() {

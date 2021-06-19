@@ -21,7 +21,7 @@ public class Bows extends Weapons{
 
 
     public static Bows newWeakBow() {
-        return new Bows("Crossbow",1,2,1,2,"Short Bow");
+        return new Bows("Crossbow",1,2,3,2,"Short Bow");
     }
 
     public static Bows newBow() {

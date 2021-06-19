@@ -30,12 +30,12 @@ public class Hero implements BattleMethods{
 
     public static Hero newWarrior() {
         return new Hero("Warrior", "A tough, well-rounded fighter with"
-                + " a balanced skillset.", 100, 100, Swords.newWeakSword(), Clothings.newLightArmor(), Rooms.newRoomInstance(),new Inventory());
+                + " a balanced skillset.", 100, 100, Swords.newWeakSword(), Clothings.newLightArmor(), Rooms.newRoomInstance(),Inventory.newInventory());
     }
 
     public static Hero newDuelist() {
         return new Hero("Duelist", "A quick, nimble duelist with an"
-                + " aptitude for landing critical attacks.", 100, 100, Axes.newWeakAxe(), Clothings.newLightArmor(), Rooms.newRoomInstance(),new Inventory());
+                + " aptitude for landing critical attacks.", 100, 100, Axes.newWeakAxe(), Clothings.newLightArmor(), Rooms.newRoomInstance(),Inventory.newInventory());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Hero implements BattleMethods{
     public int defend(Monster monster) {
         int incomingAttack = monster.attack();
         IO.playerHitPointsMessage(incomingAttack, monster);
-        hitPoints = (hitPoints * clothing.getProtection() > incomingAttack) ? hitPoints - incomingAttack : 0;
+        setHitPoints((hitPoints * clothing.getProtection() > incomingAttack) ? hitPoints - incomingAttack : 0);
         return hitPoints;
     }
 

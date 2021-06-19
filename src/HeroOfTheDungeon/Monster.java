@@ -101,7 +101,7 @@ public class Monster implements BattleMethods{
     public int defend(Hero hero) {
         int incomingAttack = hero.attack();
         IO.monsterHitPointsMessage(incomingAttack, this);
-        hitPoints = (hitPoints * clothing.getProtection() > incomingAttack) ? hitPoints - incomingAttack : 0;
+        setHitPoints((hitPoints * clothing.getProtection() > incomingAttack) ? hitPoints - incomingAttack : 0);
         return hitPoints;
     }
 

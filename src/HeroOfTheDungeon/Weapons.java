@@ -33,31 +33,31 @@ public abstract class Weapons extends Item{
         Random rand = new Random();
         int random = rand.nextInt(17) + 1;
         Weapons weapon = null;
-        if (random >= 1 && random <= 10) {
-            random = rand.nextInt(3) + 1;
+        if (random <= 10) {
+            random = rand.nextInt(3) +1;
             if (random == 1)
                 weapon = Swords.newWeakSword();
-            else if (random == 2)
-                weapon = Swords.newSword();
-            else if (random == 3)
-                weapon = Swords.newEpicSword();
+            if (random == 2)
+                weapon = Axes.newWeakAxe();
+            if (random == 3)
+                weapon = Bows.newWeakBow();
         }
-        else if (random >= 11 & random <= 16) {
+        if (random > 10 & random <= 16) {
             random = rand.nextInt(3) + 1;
             if (random == 1)
-                weapon = Axes.newWeakAxe();
-            else if (random == 2)
+                weapon = Swords.newSword();
+            if (random == 2)
                 weapon = Axes.newAxe();
-            else if (random == 3)
-                weapon = Axes.newEpicAxe();
+            if (random == 3)
+                weapon = Bows.newBow();
         }
         else {
             random = rand.nextInt(3) + 1;
             if (random == 1)
-                weapon = Bows.newWeakBow();
-            else if (random == 2)
-                weapon = Bows.newBow();
-            else if (random == 3)
+                weapon = Swords.newEpicSword();
+            if (random == 2)
+                weapon = Axes.newEpicAxe();
+            if (random == 3)
                 weapon = Bows.newEpicBow();
         }
         return weapon;

@@ -10,7 +10,7 @@ public final class Dungeon {
     public static Rooms[][] newRandomDungeon(Hero hero) {
         Rooms[][] dungeon = new Rooms[16][4];
         for (int i = 0; i < dungeon.length; i++) {
-            for (int j = 0; j < dungeon.length; j++) {
+            for (int j = 0; j < dungeon[i].length; j++) {
                 dungeon[i][j] = Rooms.newRoomInstance();
             }
         }

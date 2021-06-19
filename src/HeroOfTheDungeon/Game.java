@@ -42,14 +42,14 @@ public class Game {
             String selection = USERINPUT.nextLine();
             switch (selection) {
                 case "1":
-                    status = IO.displayPlayerStats("Warrior","A tough, well-rounded fighter with a balanced skillset.",100,Swords.newWeakSword(),Clothings.newLightArmor(), new Inventory());
+                    status = IO.displayPlayerStats("Warrior","A tough, well-rounded fighter with a balanced skillset.",100,Swords.newWeakSword(),Clothings.newLightArmor(), Inventory.newInventory());
                     currHero = Hero.newWarrior();
 
                     break;
                 case "2":
                     status = IO.displayPlayerStats("Dueler", "A quick, nimble "
                             + "duelist with an aptitude for landing critical "
-                            + "attacks.", 100, Axes.newWeakAxe(), Clothings.newLightArmor(), new Inventory());
+                            + "attacks.", 100, Axes.newWeakAxe(), Clothings.newLightArmor(), Inventory.newInventory());
                     currHero = Hero.newDuelist();
 
                     break;
@@ -58,7 +58,6 @@ public class Game {
 
         currDungeon = Dungeon.newRandomDungeon(currHero);
         dungeon.dungeonLogic(currHero, currDungeon);
-
     }
 
 }
