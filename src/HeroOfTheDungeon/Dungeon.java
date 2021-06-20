@@ -1,59 +1,58 @@
 package HeroOfTheDungeon;
 
-import java.security.SecureRandom;
-
 public final class Dungeon {
-    static SecureRandom random = new SecureRandom();
 
     private static boolean nextCorridor = false;
     private static boolean previousCorridor = false;
-    private static boolean previousRoom = false;
     private static boolean nextRoom = false;
+    private static boolean previousRoom = false;
     private static boolean nextLevel = false;
     private static boolean previousLevel = false;
-    private final static int m = random.nextInt(3) + 1;
-    private final static int n = random.nextInt(5) + 1;
-
+    private static Rooms[][] dungeon = new Rooms[4][3];
 
     public static Rooms[][] newRandomDungeon(Hero hero) {
-        Rooms[][] dungeon = new Rooms[m][n];
-        for (int i = 0; i < dungeon.length; i++) {
-            for (int j = 0; j < dungeon[i].length; j++) {
-                dungeon[i][j] = Rooms.newRoomInstance();
-            }
-        }
+        dungeon[0][0] = Rooms.R1();
+        dungeon[0][1] = Rooms.R2();
+        dungeon[0][2] = Rooms.R3();
+        dungeon[1][0] = Rooms.R4();
+        dungeon[1][1] = Rooms.R5();
+        dungeon[1][2] = Rooms.R6();
+        dungeon[2][0] = Rooms.R7();
+        dungeon[2][1] = Rooms.R8();
+        dungeon[2][2] = Rooms.R9();
+        dungeon[3][0] = Rooms.R10();
+        dungeon[3][1] = Rooms.R11();
+        dungeon[3][2] = Rooms.R12();
+
+
         hero.setCurrRoom(dungeon[0][0]);
-        int i = 1;
-        while (i <= 15) {
-            newRandomDungeon(hero);
-            i++;
-        }
         return dungeon;
     }
 
-
-
-    public boolean levelExists(int x, int y) {
-        return (rowExists(x)) && (colExists(y));
+    public boolean levelExists(int i) {
+        return i >= 1 && i <= 16;
     }
+
 
     public boolean roomExists(int x, int y) {
         return  (rowExists(x)) && (colExists(y));
     }
 
     public boolean rowExists(int x){
-        return  (x >= 0) && (x <= m);
+        return  (x >= 0) && (x < 4);
     }
 
     public boolean colExists(int y){
-        return  (y >= 0) && (y <= n);
+        return  (y >= 0) && (y < 3);
     }
 
     public void playerMovement(Hero hero) {
-        nextCorridor = roomExists(hero.getCurrX(), hero.getCurrY() + 1);
-        previousCorridor = roomExists(hero.getCurrX(), hero.getCurrY() - 1);
-        nextRoom = roomExists(hero.getCurrX() + 1, hero.getCurrY());
-        previousRoom = roomExists(hero.getCurrX() - 1, hero.getCurrY());
+        nextRoom = roomExists(hero.getCurrX(), hero.getCurrY() + 1);
+        previousRoom = roomExists(hero.getCurrX(), hero.getCurrY() - 1);
+        nextCorridor = roomExists(hero.getCurrX() + 1, hero.getCurrY());
+        previousCorridor = roomExists(hero.getCurrX() - 1, hero.getCurrY());
+        nextLevel = levelExists(hero.getCurrLevel() + 1);
+        previousLevel = levelExists(hero.getCurrLevel() - 1);
         IO.movePlayer(hero);
 
     }
@@ -61,6 +60,7 @@ public final class Dungeon {
     public void battle(Hero hero, Monster monster, Rooms[][] dungeon) {
         IO.battleIntro(hero, dungeon[hero.getCurrX()][hero.getCurrY()]);
         IO.battle(hero, monster);
+
     }
 
     public void dungeonLogic(Hero hero, Rooms[][] dungeon) {
@@ -70,6 +70,7 @@ public final class Dungeon {
             } else if (hero.isAlive()) {
                 playerMovement(hero);
             }
+
         }
     }
 
@@ -81,12 +82,12 @@ public final class Dungeon {
         return previousCorridor;
     }
 
-    public static boolean isPreviousRoom() {
-        return previousRoom;
-    }
-
     public static boolean isNextRoom() {
         return nextRoom;
+    }
+
+    public static boolean isPreviousRoom() {
+        return previousRoom;
     }
 
     public static boolean isNextLevel() {
@@ -97,11 +98,11 @@ public final class Dungeon {
         return previousLevel;
     }
 
-    public static int getM() {
-        return m;
+    public static Rooms[][] getDungeon() {
+        return dungeon;
     }
 
-    public static int getN() {
-        return n;
+    public static void setDungeon(Rooms[][] dungeon) {
+        Dungeon.dungeon = dungeon;
     }
 }

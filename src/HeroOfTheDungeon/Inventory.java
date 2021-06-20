@@ -1,17 +1,33 @@
 package HeroOfTheDungeon;
 
+import java.util.ArrayList;
+
+
 public class Inventory {
-    private Item[] items;
+    private static ArrayList<Item> items;
+    private final int maxCapacity = 100;
     private int curCapacity;
 
+    public Inventory(ArrayList<Item> items, int curCapacity) {
+        this.items = items;
+        this.curCapacity = curCapacity;
+    }
+
     public Inventory() {
-        items = new Item[0];
+        items = new ArrayList<>();
         this.curCapacity = 0;
     }
 
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
+    }
 
     public int getMaxCapacity() {
-        return 100;
+        return maxCapacity;
     }
 
     public int getCurCapacity() {
@@ -24,62 +40,37 @@ public class Inventory {
         this.curCapacity = curCapacity;
     }
 
-    public int calculateItemsValue() {
-        int value = 0;
-        for (Item item : items) {
-            value += item.getValue();
-        }
-        return value;
-    }
-
     public void add(Item item) {
+
         try {
             if ((getCurCapacity() + item.getWeight()) <= getMaxCapacity()) {
-                for (int i = 0; i < items.length; i++) {
-                    if (items[i] == null) {
-                        items[i] = item;
-                        return;
-                    }
-                }
-                int len = items.length;
-                Item[] newItems = new Item[len + 1];
-                System.arraycopy(items, 0, newItems, 0, len);
-                newItems[len] = item;
-                items = newItems;
+                items.add(item);
+                setCurCapacity(item.getWeight() + getCurCapacity());
             }
-            setCurCapacity(item.getWeight() + getCurCapacity());
         } catch (ArithmeticException e) {
             printItems();
         }
     }
 
 
+    public void remove(Item item) {
+        items.remove(item);
+        setCurCapacity(getCurCapacity() - item.getWeight());
+    }
+
     public void printItems() {
-        for (Item item : items) {
-            if (item == null) {
-                continue;
-            }
-            String itemName = item.getName();
-            System.out.println(itemName);
-        }
+        for (Item item : items)
+            item.display();
     }
 
     public boolean isEmpty() {
-        for (Item item : items) {
-            if (item != null) {
-                return false;
-            }
-        }
-        return true;
+        if (items.size() == 0) {
+            System.out.println("Inventory is empty.");
+            return false;
+        } else
+            return true;
     }
 
-    public void setItems(Item[] items) {
-        this.items = items == null ? new Item[0] : items;
-    }
-
-    public Item[] getItems() {
-        return items;
-    }
 
     public static Inventory newInventory() {
         Inventory inventory = new Inventory();
@@ -88,6 +79,4 @@ public class Inventory {
         inventory.add(Item.newRandomItem());
         return inventory;
     }
-
-
 }

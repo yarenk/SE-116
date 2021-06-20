@@ -1,146 +1,173 @@
 package HeroOfTheDungeon;
 
+
 public class Rooms {
 
     private final String description;
-    private Monster monster;
-    private final int numberOfMonsters;
+    private final int numberOfMonsters = 1;
     private final int numberOfTownPeople;
-    private final boolean isLane;
+    private final boolean isBridge;
+    private final boolean isStair;
     private Inventory inventory;
-    private Rooms door;
-    private Rooms bridge;
-    private Rooms stairs;
+    private Monster monster;
 
-
-    public Rooms(String description, Monster monster, Inventory inventory) {
+    public Rooms(String description, int numberOfTownPeople, boolean isBridge, boolean isStair, Inventory inventory, Monster monster) {
         this.description = description;
+        this.numberOfTownPeople = numberOfTownPeople;
+        this.isBridge = isBridge;
+        this.isStair = isStair;
+        this.inventory = inventory;
         this.monster = monster;
-        this.numberOfMonsters = 1;
-        this.numberOfTownPeople = 1;
-        this.isLane = false;
-        this.inventory = inventory;
     }
 
-    public Rooms(String description, Monster monster1, Monster monster2, Inventory inventory) {
-        this.description = description;
-        this.monster = monster1;
-        this.monster = monster2;
-        this.numberOfMonsters = 2;
-        this.numberOfTownPeople = 2;
-        this.isLane = false;
-        this.inventory = inventory;
-    }
-
-    public Rooms(String description, Monster monster1, Monster monster2, Monster monster3, Inventory inventory) {
-        this.description = description;
-        this.monster = monster1;
-        this.monster = monster2;
-        this.monster = monster3;
-        this.numberOfMonsters = 3;
-        this.numberOfTownPeople = 3;
-        this.isLane = true;
-        this.inventory = inventory;
-    }
-
-
-    /*public static Rooms R1() {
-        return new Rooms();
-    }
-
+    public static Rooms R1() {
+        return new Rooms("Thick cobwebs fill the corners of the room, and wisps of webbing hang from the ceiling and waver in a wind you can barely feel.",2,false,false,Inventory.newInventory(),Monster.newRandomEasyMonster());
+}
     public static Rooms R2() {
-        return new Rooms();
+        return new Rooms("A flurry of bats suddenly flaps through the doorway, their screeching barely audible as they careen past your heads. They flap past you into the rooms and halls beyond.",1,true,false,Inventory.newInventory(),Monster.newRandomEasyMonster());
     }
-
     public static Rooms R3() {
-        return new Rooms();
+        return new Rooms("Rats inside the room shriek when they hear the door open, then they run in all directions from a putrid corpse lying in the center of the floor. As these creatures crowd around the edges of the room, seeking to crawl through a hole in one corner, they fight one another",2,false,false,Inventory.newInventory(),Monster.newRandomEasyMonster());
     }
-
     public static Rooms R4() {
-        return new Rooms();
+        return new Rooms("The strong, sour-sweet scent of vinegar assaults your nose as you enter this room. Sundered casks and broken bottle glass line the walls of this room. Clearly this was someone's wine cellar for a time.",3,true,false,Inventory.newInventory(),Monster.newRandomMediumMonster());
     }
-
     public static Rooms R5() {
-        return new Rooms();
+        return new Rooms("This room is walled and floored with black marble veined with white. The ceiling is similarly marbled, but the thick pillars that hold it up are white. A blood-like brown stain drips down one side of a nearby pillar.",2,false,true,Inventory.newInventory(),Monster.newRandomMediumMonster());
     }
-
     public static Rooms R6() {
-        return new Rooms();
+        return new Rooms("A pungent, earthy odor greets you as you pull open the door and peer into this room. Mushrooms grow in clusters of hundreds all over the floor. Looking into the room is like looking down on a forest.",1,false,false,Inventory.newInventory(),Monster.newRandomMediumMonster());
     }
-
     public static Rooms R7() {
-        return new Rooms();
+        return new Rooms("You gaze into the room and hundreds of skulls gaze coldly back at you. They're set in niches in the walls in a checkerboard pattern, each skull bearing a half-melted candle on its head. The grinning bones stare vacantly into the room, which otherwise seems empty.",3,false,false,Inventory.newInventory(),Monster.newRandomMediumMonster());
     }
-
     public static Rooms R8() {
-        return new Rooms();
+        return new Rooms("Huge rusted metal blades jut out of cracks in the walls, and rusting spikes project down from the ceiling almost to the floor. This room may have once been trapped heavily, but someone triggered them, apparently without getting killed. The traps were never reset and now seem rusted in place.",2,true,false,Inventory.newInventory(),Monster.newRandomHardMonster());
     }
-
     public static Rooms R9() {
-        return new Rooms();
+        return new Rooms("In the center of this large room lies a 30-foot-wide round pit, its edges lined with rusting iron spikes. About 5 feet away from the pit's edge stand several stone semicircular benches. The scent of sweat and blood lingers, which makes the pit's resemblance to a fighting pit or gladiatorial arena even stronger.",2,false,false,Inventory.newInventory(),Monster.newRandomMediumMonster());
     }
-
     public static Rooms R10() {
-        return new Rooms();
+        return new Rooms("A strange ceiling is the focal point of the room before you. It's honeycombed with hundreds of holes about as wide as your head. They seem to penetrate the ceiling to some height beyond a couple feet, but you can't be sure from your vantage point.",1,false,false,Inventory.newInventory(),Monster.newRandomHardMonster());
     }
-
     public static Rooms R11() {
-        return new Rooms();
+        return new Rooms("You find this chamber lit dimly by guttering candles that squat in small hills of melted wax. The smell of their smoke hits your nose along with an odor that is reminiscent of the sea. Someone has taken a large amount of salt and drawn a broad circular symbol on the floor with the candles situated equidistantly around it. Atop the salt, someone traced the symbol with a black powder that glints a dull silver in the candlelight.",3,false,false,Inventory.newInventory(),Monster.newRandomHardMonster());
     }
-
     public static Rooms R12() {
-        return new Rooms();
+        return new Rooms("You've opened the door to a torture chamber. Several devices of degradation, pain, and death stand about the room, all of them showing signs of regular use. The wood of the rack is worn smooth by struggling bodies, and the iron maiden appears to be occupied by a corpse.",2,true,false,Inventory.newInventory(),Monster.newRandomHardMonster());
     }
 
-    public static Rooms R13() {
-        return new Rooms();
-    }
 
-    public static Rooms R14() {
-        return new Rooms();
-    }
+    /*public static Rooms newRoomInstance() {
+        String description = null;
+        int numberOfMonsters = 0;
+        int numberOfTownPeople = 0;
+        boolean isStairRoom = false;
+        boolean isBridgeRoom = false;
 
-    public static Rooms R15() {
-        return new Rooms();
-    }*/
-
-    static Rooms R1 = new Rooms();
-    static Rooms R2 = new Rooms();
-    static Rooms R3 = new Rooms();
-    static Rooms R4 = new Rooms();
-    static Rooms R5 = new Rooms();
-    static Rooms R6 = new Rooms();
-    static Rooms R7 = new Rooms();
-    static Rooms R8 = new Rooms();
-    static Rooms R9 = new Rooms();
-    static Rooms R10 = new Rooms();
-    static Rooms R11 = new Rooms();
-    static Rooms R12 = new Rooms();
-    static Rooms R13 = new Rooms();
-    static Rooms R14 = new Rooms();
-    static Rooms R15 = new Rooms();
-
-    static Rooms[] rooms = {R1,R2,R3,R4,R5,R6,R7,R8,R9,R10,R11,R12,R13,R14,R15};
-
-
-    public static Rooms newRoomInstance() {
-
-        int roomNumber = Dungeon.getN();
-        int corridorNumber = Dungeon.getM();
-
-        Rooms[] corridor1 = new Rooms[roomNumber];
-
-        for (int i = 0; i < corridor1.length; i++) {
-            corridor1[i] = rooms[i];
+        int i = 1;
+        while (i <= 12) {
+            switch (i) {
+                case 1:
+                    description = "You've opened the door to a torture chamber. Several devices of degradation, pain, and death stand about the room, all of them showing signs of regular use. The wood of the rack is worn smooth by struggling bodies, and the iron maiden appears to be occupied by a corpse.\n";
+                    numberOfMonsters = 3;
+                    numberOfTownPeople = 3;
+                    isBridgeRoom = false;
+                    isStairRoom = false;
+                    break;
+                case 2:
+                    description = "You find this chamber lit dimly by guttering candles that squat in small hills of melted wax. The smell of their smoke hits your nose along with an odor that is reminiscent of the sea. Someone has taken a large amount of salt and drawn a broad circular symbol on the floor with the candles situated equidistantly around it. Atop the salt, someone traced the symbol with a black powder that glints a dull silver in the candlelight.";
+                    numberOfMonsters = 3;
+                    numberOfTownPeople = 2;
+                    isBridgeRoom = true;
+                    isStairRoom = false;
+                    break;
+                case 3:
+                    description = "A strange ceiling is the focal point of the room before you. It's honeycombed with hundreds of holes about as wide as your head. They seem to penetrate the ceiling to some height beyond a couple feet, but you can't be sure from your vantage point.";
+                    numberOfMonsters = 3;
+                    numberOfTownPeople = 1;
+                    isBridgeRoom = false;
+                    isStairRoom = false;
+                    break;
+                case 4:
+                    description = "In the center of this large room lies a 30-foot-wide round pit, its edges lined with rusting iron spikes. About 5 feet away from the pit's edge stand several stone semicircular benches. The scent of sweat and blood lingers, which makes the pit's resemblance to a fighting pit or gladiatorial arena even stronger.";
+                    numberOfMonsters = 2;
+                    numberOfTownPeople = 2;
+                    isBridgeRoom = false;
+                    isStairRoom = false;
+                    break;
+                case 5:
+                    description = " Huge rusted metal blades jut out of cracks in the walls, and rusting spikes project down from the ceiling almost to the floor. This room may have once been trapped heavily, but someone triggered them, apparently without getting killed. The traps were never reset and now seem rusted in place.";
+                    numberOfMonsters = 2;
+                    numberOfTownPeople = 1;
+                    isBridgeRoom = false;
+                    isStairRoom = true;
+                    break;
+                case 6:
+                    description = "You gaze into the room and hundreds of skulls gaze coldly back at you. They're set in niches in the walls in a checkerboard pattern, each skull bearing a half-melted candle on its head. The grinning bones stare vacantly into the room, which otherwise seems empty.\n";
+                    numberOfMonsters = 2;
+                    numberOfTownPeople = 0;
+                    isBridgeRoom = true;
+                    isStairRoom = false;
+                    break;
+                case 7:
+                    description = "A pungent, earthy odor greets you as you pull open the door and peer into this room. Mushrooms grow in clusters of hundreds all over the floor. Looking into the room is like looking down on a forest.";
+                    numberOfMonsters = 2;
+                    numberOfTownPeople = 1;
+                    isBridgeRoom = true;
+                    isStairRoom = false;
+                    break;
+                case 8:
+                    description = "This room is walled and floored with black marble veined with white. The ceiling is similarly marbled, but the thick pillars that hold it up are white. A blood-like brown stain drips down one side of a nearby pillar.\n";
+                    numberOfMonsters = 2;
+                    numberOfTownPeople = 2;
+                    isBridgeRoom = false;
+                    isStairRoom = false;
+                    break;
+                case 9:
+                    description = "The strong, sour-sweet scent of vinegar assaults your nose as you enter this room. Sundered casks and broken bottle glass line the walls of this room. Clearly this was someone's wine cellar for a time.\n";
+                    numberOfMonsters = 1;
+                    numberOfTownPeople = 0;
+                    isBridgeRoom = false;
+                    isStairRoom = false;
+                    break;
+                case 10:
+                    description = "Rats inside the room shriek when they hear the door open, then they run in all directions from a putrid corpse lying in the center of the floor. As these creatures crowd around the edges of the room, seeking to crawl through a hole in one corner, they fight one another.\n";
+                    numberOfMonsters = 1;
+                    numberOfTownPeople = 1;
+                    isBridgeRoom = false;
+                    isStairRoom = false;
+                    break;
+                case 11:
+                    description = "A flurry of bats suddenly flaps through the doorway, their screeching barely audible as they careen past your heads. They flap past you into the rooms and halls beyond.\n";
+                    numberOfMonsters = 0;
+                    numberOfTownPeople = 0;
+                    isBridgeRoom = true;
+                    isStairRoom = false;
+                    break;
+                case 12:
+                    description = "Thick cobwebs fill the corners of the room, and wisps of webbing hang from the ceiling and waver in a wind you can barely feel.";
+                    numberOfMonsters = 1;
+                    numberOfTownPeople = 1;
+                    isBridgeRoom = false;
+                    isStairRoom = false;
+                    break;
+            }
+        i++;
         }
+        if (numberOfMonsters == 0)
+            return new Rooms(description,numberOfTownPeople,isStairRoom,Inventory.newInventory());
+        if (numberOfMonsters == 1)
+            return new Rooms(description,numberOfMonsters,numberOfTownPeople,isBridgeRoom,isStairRoom,Inventory.newInventory(),Monster.newRandomEasyMonster());
+        if (numberOfMonsters == 2)
+            return new Rooms(description,numberOfMonsters,numberOfTownPeople,isBridgeRoom,isStairRoom,Inventory.newInventory(),Monster.newRandomEasyMonster(),Monster.newRandomMediumMonster());
+        if (numberOfMonsters == 3)
+            return new Rooms(description,numberOfMonsters,numberOfTownPeople,isBridgeRoom,isStairRoom,Inventory.newInventory(),Monster.newRandomMediumMonster(),Monster.newRandomMediumMonster(),Monster.newRandomHardMonster());
+        else
+            return null;
 
-
-       for (int i = 0; i < corridor1.length; i++) {
-           corridor1[i] = new Rooms();
-       }
-
-       return
     }
+  */
 
 
     @Override
@@ -160,8 +187,12 @@ public class Rooms {
         return numberOfTownPeople;
     }
 
-    public boolean isLane() {
-        return isLane;
+    public boolean isBridge() {
+        return isBridge;
+    }
+
+    public boolean isStair() {
+        return isStair;
     }
 
     public Inventory getInventory() {
@@ -180,27 +211,4 @@ public class Rooms {
         this.monster = monster;
     }
 
-    public Rooms getDoor() {
-        return door;
-    }
-
-    public void setDoor(Rooms door) {
-        this.door = door;
-    }
-
-    public Rooms getBridge() {
-        return bridge;
-    }
-
-    public void setBridge(Rooms bridge) {
-        this.bridge = bridge;
-    }
-
-    public Rooms getStairs() {
-        return stairs;
-    }
-
-    public void setStairs(Rooms stairs) {
-        this.stairs = stairs;
-    }
 }

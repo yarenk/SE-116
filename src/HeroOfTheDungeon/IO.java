@@ -1,7 +1,6 @@
 package HeroOfTheDungeon;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
 
 public final class IO {
 
@@ -18,7 +17,7 @@ public final class IO {
         System.out.println();
         System.out.println(" 3.       Credits        ");
         System.out.println();
-        System.out.println(" 3.     Exit Game        ");
+        System.out.println(" 4.     Exit Game        ");
         System.out.println();
         System.out.print(" Make a Selection: ");
         System.out.println();
@@ -87,10 +86,10 @@ public final class IO {
     public static void movePlayer(Hero hero) {
 
 
-        if (Dungeon.isNextCorridor() && Rooms.newRoomInstance().isLane()) {
+        if (Dungeon.isNextCorridor() && hero.getCurrRoom().isBridge()) {
             System.out.println("Next Corridor (nc)\n");
         }
-        if (Dungeon.isPreviousCorridor() && Rooms.newRoomInstance().isLane()) {
+        if (Dungeon.isPreviousCorridor() && hero.getCurrRoom().isBridge()) {
             System.out.println("Previous Corridor (pc)\n");
         }
         if (Dungeon.isNextRoom()) {
@@ -99,24 +98,48 @@ public final class IO {
         if (Dungeon.isPreviousRoom()) {
             System.out.println("Previous Room (pr)\n");
         }
+        if (Dungeon.isNextLevel() && hero.getCurrRoom().isStair()) {
+            System.out.println("Next Level (nl)\n");
+        }
+        if (Dungeon.isPreviousLevel() && hero.getCurrRoom().isStair()) {
+            System.out.println("Previous Level (pl)\n");
+        }
+
 
         System.out.print("Where would you like to travel?: ");
         String selection = Game.USERINPUT.nextLine();
-        if (selection.equals("nc") && Dungeon.isNextCorridor() && Rooms.newRoomInstance().isLane()) {
-            hero.setCurrY(hero.getCurrY() + 1);
-        } else if (selection.equals("pc") && Dungeon.isPreviousCorridor() && Rooms.newRoomInstance().isLane()) {
-            hero.setCurrY(hero.getCurrY() - 1);
-        } else if (selection.equals("nr") && Dungeon.isNextRoom()) {
+        if (selection.equals("nc") && Dungeon.isNextCorridor() && hero.getCurrRoom().isBridge()) {
             hero.setCurrX(hero.getCurrX() + 1);
-        } else if (selection.equals("pr") && Dungeon.isPreviousRoom()) {
-            hero.setCurrX(hero.getCurrX() - 1);
+            hero.setCurrRoom(Dungeon.getDungeon()[hero.getCurrX()][hero.getCurrY()]);
         }
+        else if (selection.equals("pc") && Dungeon.isPreviousCorridor() && hero.getCurrRoom().isBridge()) {
+            hero.setCurrX(hero.getCurrX() - 1);
+            hero.setCurrRoom(Dungeon.getDungeon()[hero.getCurrX()][hero.getCurrY()]);
+        }
+        else if (selection.equals("nr") && Dungeon.isNextRoom()) {
+            hero.setCurrY(hero.getCurrY() + 1);
+            hero.setCurrRoom(Dungeon.getDungeon()[hero.getCurrX()][hero.getCurrY()]);
+        }
+        else if (selection.equals("pr") && Dungeon.isPreviousRoom()) {
+            hero.setCurrY(hero.getCurrY() - 1);
+            hero.setCurrRoom(Dungeon.getDungeon()[hero.getCurrX()][hero.getCurrY()]);
+        }
+        else if (selection.equals("nl") && Dungeon.isNextLevel() && hero.getCurrRoom().isStair()) {
+           hero.setCurrLevel(hero.getCurrLevel() + 1);
+            hero.setCurrRoom(Dungeon.getDungeon()[hero.getCurrX()][hero.getCurrY()]);
+        }
+        else if (selection.equals("pl") && Dungeon.isPreviousLevel() && hero.getCurrRoom().isStair()) {
+            hero.setCurrLevel(hero.getCurrLevel() - 1);
+            hero.setCurrRoom(Dungeon.getDungeon()[hero.getCurrX()][hero.getCurrY()]);
+        }
+
+
+        //hero.setCurrRoom(Rooms.);
 
     }
 
     public static void battleIntro(Hero hero, Rooms room) {
-        System.out.println("You arrive at " + (hero.getCurrX() + 1) + ". Level "
-                + (hero.getCurrY() + 1) + ". Room");
+        System.out.println("Level " + hero.getCurrLevel() + " Room Coordinate (" + (hero.getCurrX()) + "," + (hero.getCurrY()) + ")");
         System.out.println("You enter the room and look around and see...");
         System.out.println(room.getDescription() + "\n\n");
         System.out.println("Number of monsters: " + room.getNumberOfMonsters());
@@ -146,12 +169,11 @@ public final class IO {
         } else if (!monster.isAlive()) {
             SecureRandom rand = new SecureRandom();
             int random = rand.nextInt(2);
-            if (random == 0){
-                hero.setNumberOfTownPeopleSaved(hero.getNumberOfTownPeopleSaved()+hero.getCurrRoom().getNumberOfTownPeople());
+            if (random == 0) {
+                hero.setNumberOfTownPeopleSaved(hero.getNumberOfTownPeopleSaved() + hero.getCurrRoom().getNumberOfTownPeople());
                 System.out.println(hero.getName() + " saved " + hero.getCurrRoom().getNumberOfTownPeople() + " people.");
                 TownPeople.heal(hero);
-            }
-            else {
+            } else {
                 hero.setNumberOfTownPeopleSaved(hero.getNumberOfTownPeopleSaved());
                 System.out.println("Monster killed the whole town people.");
             }
@@ -159,9 +181,65 @@ public final class IO {
             System.out.println("The monster has been defeated!");
             System.out.println("--------------------------------\n");
 
-
+            loot(hero,hero.getCurrRoom().getMonster());
         }
-// LOOT AŞAMALARI YAPILACAK ENVANTER DEĞİŞİMİ VS.
+    }
+
+    public static void loot(Hero hero, Monster monster) {
+
+        Inventory lootInventory = new Inventory();
+
+        for (int i = 0; i < monster.getInventory().getItems().size(); i++) {
+            lootInventory.add(monster.getInventory().getItems().get(i));
+        }
+
+        for (int i = 0; i < hero.getCurrRoom().getInventory().getItems().size(); i++) {
+            lootInventory.add(hero.getCurrRoom().getInventory().getItems().get(i));
+        }
+
+
+        System.out.println("<<<YOUR INVENTORY>>>");
+        if (hero.getInventory().isEmpty())
+            hero.getInventory().printItems();
+        System.out.println();
+        System.out.println("<<<ALL ITEMS YOU CAN PICK>>>");
+        if (lootInventory.isEmpty())
+            lootInventory.printItems();
+        System.out.println();
+        String answer = "";
+        while (!answer.equals("n")) {
+            System.out.println("If are there any items you want to drop them? (y/n)");
+            answer = Game.USERINPUT.nextLine();
+            if (answer.equals("y")) {
+                System.out.println("Which item do you want to drop?");
+                System.out.println("Enter the name of item:");
+                String nameOfItem = Game.USERINPUT.nextLine();
+                for (int i = 0; i < hero.getInventory().getItems().size(); i++) {
+                    if (nameOfItem.equals(hero.getInventory().getItems().get(i).getName())) {
+                        hero.getInventory().getItems().remove(hero.getInventory().getItems().get(i));
+                    }
+                }
+                System.out.println("You do not have this item.");
+            }
+        }
+
+        String choice = "";
+        while (!choice.equals("n")) {
+            System.out.println("If are there any items you want to pick them up? (y/n)");
+            choice = Game.USERINPUT.nextLine();
+            if (choice.equals("y")) {
+                System.out.println("Which item do you want to pick?");
+                System.out.println("Enter the name of item:");
+                String nameOfItem = Game.USERINPUT.nextLine();
+                for (int i = 0; i < lootInventory.getItems().size(); i++) {
+                    if (nameOfItem.equals(lootInventory.getItems().get(i).getName())) {
+                        hero.getInventory().getItems().add(lootInventory.getItems().get(i));
+                    }
+                }
+                System.out.println("The item is not available.");
+            }
+        }
+
     }
 
     public static void playerHitPointsMessage(int damage, Monster monster) {

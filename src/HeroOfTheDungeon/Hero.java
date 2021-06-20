@@ -14,31 +14,34 @@ public class Hero implements BattleMethods{
     private Inventory inventory;
     private int numberOfTownPeopleSaved;
     private int highScore;
+    private int currLevel;
+    //private Dungeon currDungeon;
 
-    public Hero(String name, String description, int maxHitPoints, int hitPoints, Weapons weapon, Clothings clothing, Rooms currRoom, Inventory inventory) {
+    public Hero(String name, String description, int maxHitPoints, int hitPoints, Weapons weapon, Clothings clothing, Inventory inventory) {
         this.name = name;
         this.description = description;
         this.maxHitPoints = maxHitPoints;
         this.hitPoints = hitPoints;
         this.weapon = weapon;
         this.clothing = clothing;
+        this.currLevel = 1;
         this.currX = 0;
         this.currY = 0;
-        this.currRoom = currRoom;
+        //this.currRoom = new Rooms();
         this.inventory = inventory;
         this.numberOfTownPeopleSaved = 0;
     }
 
     public static Hero newWarrior() {
-        return new Hero("Warrior", "You start with a weak weapon but with a high health value.", 150, 110, Swords.newWeakSword(), Clothings.newLightArmor(), Rooms.newRoomInstance(),new Inventory());
+        return new Hero("Warrior", "You start with a weak weapon but with a high health value.", 150, 110, Swords.newWeakSword(), Clothings.newLightArmor(), Inventory.newInventory());
     }
 
     public static Hero newDuelist() {
-        return new Hero("Duelist", "You start with a balanced weapon and health value.", 150, 100, Axes.newWeakAxe(), Clothings.newLightArmor(), Rooms.newRoomInstance(),new Inventory());
+        return new Hero("Duelist", "You start with a balanced weapon and health value.", 150, 100, Axes.newWeakAxe(), Clothings.newLightArmor(), Inventory.newInventory());
     }
 
     public static Hero newNinja() {
-        return new Hero("Ninja","You start with a powerful weapon and low health to begin with.",150,90,Bows.newWeakBow(),Clothings.newLightArmor(),Rooms.newRoomInstance(),new Inventory());
+        return new Hero("Ninja","You start with a powerful weapon and low health to begin with.",150,90,Bows.newWeakBow(),Clothings.newLightArmor(), Inventory.newInventory());
     }
 
     public int calculateValue() {
@@ -151,5 +154,13 @@ public class Hero implements BattleMethods{
 
     public void setHighScore(int highScore) {
         this.highScore = highScore;
+    }
+
+    public int getCurrLevel() {
+        return currLevel;
+    }
+
+    public void setCurrLevel(int currLevel) {
+        this.currLevel = currLevel;
     }
 }

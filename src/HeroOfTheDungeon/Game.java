@@ -60,24 +60,18 @@ public class Game {
             }
         } while (!status);
 
-        currDungeon = Dungeon.newRandomDungeon(currHero);
-        dungeon.dungeonLogic(currHero, currDungeon);
-    }
-    public static void createFile(){
-        File file = new File("HighScores.txt");
-        try {
-            if (file.createNewFile()){
-                System.out.println("File created");
-            }else{
-                System.out.println("File already exists");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        int i = 1;
+        while (i < 16) {
+            currDungeon = Dungeon.newRandomDungeon(currHero);
+            i++;
+            dungeon.dungeonLogic(currHero, currDungeon);
         }
+        //currDungeon = Dungeon.newRandomDungeon(currHero);
+        //dungeon.dungeonLogic(currHero, currDungeon);
     }
 
     public static void readFile(){
-        File file = new File("HighScores.txt");
+        File file = new File("C:\\Users\\EMRE\\IdeaProjects\\SE-116\\HighScore.txt");
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()){
@@ -92,9 +86,9 @@ public class Game {
 
     public static void writeFile(){
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("HighScores.txt",true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\EMRE\\IdeaProjects\\SE-116\\HighScore.txt",true));
             writer.newLine();
-            writer.write(currHero.getHighScore());
+            writer.write(String.valueOf(currHero.getHighScore()));
             System.out.println("Saved");
             writer.close();
 
