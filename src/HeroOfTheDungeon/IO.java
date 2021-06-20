@@ -134,8 +134,6 @@ public final class IO {
         }
 
 
-        //hero.setCurrRoom(Rooms.);
-
     }
 
     public static void battleIntro(Hero hero, Rooms room) {
@@ -264,6 +262,7 @@ public final class IO {
                 for (int i = 0; i < hero.getInventory().getItems().size(); i++) {
                     if (nameOfItem.equals(hero.getInventory().getItems().get(i).getName())) {
                         hero.getInventory().getItems().remove(hero.getInventory().getItems().get(i));
+                        System.out.println("You have removed the item from your inventory.");
                     }
                 }
             }
@@ -280,6 +279,7 @@ public final class IO {
                 for (int i = 0; i < lootInventory.getItems().size(); i++) {
                     if (nameOfItem.equals(lootInventory.getItems().get(i).getName())) {
                         hero.getInventory().getItems().add(lootInventory.getItems().get(i));
+                        System.out.println("You have added the item to your inventory.");
                     }
                 }
             }

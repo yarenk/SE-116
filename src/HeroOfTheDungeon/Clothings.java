@@ -29,10 +29,10 @@ public class Clothings extends Item{
         Random rand = new Random();
         int random = rand.nextInt(10) + 1;
         Clothings clothings = null;
-        if (random <= 6) {
+        if (random < 6) {
             clothings = newLightArmor();
         }
-        if (random >= 6 & random <= 9) {
+        else if (random >= 6 & random <= 9) {
             clothings = newMediumArmor();
         }
         else {
@@ -50,11 +50,11 @@ public class Clothings extends Item{
     }
 
     public static Clothings newMediumArmor() {
-        return new Clothings("Studded Leather",25,20,4,"Leather Armor");
+        return new Clothings("Studded Leather",10,20,4,"Leather Armor");
     }
 
     public static Clothings newHeavyArmor() {
-        return new Clothings("Chain Mail",55,75,6,"Chain Armor");
+        return new Clothings("Chain Mail",15,75,6,"Chain Armor");
     }
 
     @Override
