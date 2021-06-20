@@ -28,11 +28,11 @@ public class Clothings extends Item{
     public static Clothings newRandomClothing() {
         Random rand = new Random();
         int random = rand.nextInt(10) + 1;
-        Clothings clothings = null;
-        if (random < 6) {
+        Clothings clothings;
+        if (random <= 6) {
             clothings = newLightArmor();
         }
-        else if (random >= 6 & random <= 9) {
+        else if (random <= 9) {
             clothings = newMediumArmor();
         }
         else {

@@ -15,7 +15,6 @@ public class Hero implements BattleMethods{
     private int numberOfTownPeopleSaved;
     private int highScore;
     private int currLevel;
-    //private Dungeon currDungeon;
 
     public Hero(String name, String description, int maxHitPoints, int hitPoints, Weapons weapon, Clothings clothing, Inventory inventory) {
         this.name = name;
@@ -27,7 +26,6 @@ public class Hero implements BattleMethods{
         this.currLevel = 1;
         this.currX = 0;
         this.currY = 0;
-        //this.currRoom = new Rooms();
         this.inventory = inventory;
         this.numberOfTownPeopleSaved = 0;
     }

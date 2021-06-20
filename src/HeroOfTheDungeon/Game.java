@@ -66,8 +66,6 @@ public class Game {
             i++;
             dungeon.dungeonLogic(currHero, currDungeon);
         }
-        //currDungeon = Dungeon.newRandomDungeon(currHero);
-        //dungeon.dungeonLogic(currHero, currDungeon);
     }
 
     public static void readFile(){
