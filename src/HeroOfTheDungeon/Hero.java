@@ -13,6 +13,7 @@ public class Hero implements BattleMethods{
     private Rooms currRoom;
     private Inventory inventory;
     private int numberOfTownPeopleSaved;
+    private int highScore;
 
     public Hero(String name, String description, int maxHitPoints, int hitPoints, Weapons weapon, Clothings clothing, Rooms currRoom, Inventory inventory) {
         this.name = name;
@@ -142,5 +143,13 @@ public class Hero implements BattleMethods{
 
     public void setNumberOfTownPeopleSaved(int numberOfTownPeopleSaved) {
         this.numberOfTownPeopleSaved = numberOfTownPeopleSaved;
+    }
+
+    public int getHighScore() {
+        return highScore;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
     }
 }

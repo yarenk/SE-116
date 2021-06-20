@@ -11,20 +11,15 @@ public final class Dungeon {
     private static boolean nextRoom = false;
     private static boolean nextLevel = false;
     private static boolean previousLevel = false;
-    private static boolean[][] booleanCoordinate;
-    private final static int m = random.nextInt(3);
-    private final static int n = random.nextInt(5);
+    private final static int m = random.nextInt(3) + 1;
+    private final static int n = random.nextInt(5) + 1;
 
 
     public static Rooms[][] newRandomDungeon(Hero hero) {
-        int stairPositionX, stairPositionY;
-        stairPositionX = random.nextInt(m + 1);
-        stairPositionY = random.nextInt(n + 1);
         Rooms[][] dungeon = new Rooms[m][n];
         for (int i = 0; i < dungeon.length; i++) {
             for (int j = 0; j < dungeon[i].length; j++) {
                 dungeon[i][j] = Rooms.newRoomInstance();
-                setBooleanCoordinate(isStair(booleanCoordinate,stairPositionX,stairPositionY));
             }
         }
         hero.setCurrRoom(dungeon[0][0]);
@@ -36,22 +31,6 @@ public final class Dungeon {
         return dungeon;
     }
 
-    public static boolean[][] isStair(boolean[][] maze, int a, int b) {
-
-        int stairPositionX, stairPositionY;
-
-        SecureRandom random = new SecureRandom();
-        stairPositionX = random.nextInt(a);
-        stairPositionY = random.nextInt(b);
-
-        for (int i = 0; i < maze.length; i++) {
-            for (int j = 0; j < maze.length; j++) {
-
-                maze[i][j] = (i == stairPositionX && j == stairPositionY);
-            }
-        }
-        return maze;
-    }
 
 
     public boolean levelExists(int x, int y) {
@@ -118,11 +97,11 @@ public final class Dungeon {
         return previousLevel;
     }
 
-    public static void setBooleanCoordinate(boolean[][] booleanCoordinate) {
-        Dungeon.booleanCoordinate = booleanCoordinate;
+    public static int getM() {
+        return m;
     }
 
-    public static boolean[][] getBooleanCoordinate() {
-        return booleanCoordinate;
+    public static int getN() {
+        return n;
     }
 }

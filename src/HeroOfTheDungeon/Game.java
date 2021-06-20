@@ -1,5 +1,6 @@
 package HeroOfTheDungeon;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class Game {
@@ -23,10 +24,14 @@ public class Game {
                     status = true;
                     break;
                 case "2":
-                    IO.credits();
+                    readFile();
                     status = true;
                     break;
                 case "3":
+                    IO.credits();
+                    status = true;
+                    break;
+                case "4":
                     System.exit(0);
             }
 
@@ -57,6 +62,46 @@ public class Game {
 
         currDungeon = Dungeon.newRandomDungeon(currHero);
         dungeon.dungeonLogic(currHero, currDungeon);
+    }
+    public static void createFile(){
+        File file = new File("HighScores.txt");
+        try {
+            if (file.createNewFile()){
+                System.out.println("File created");
+            }else{
+                System.out.println("File already exists");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void readFile(){
+        File file = new File("HighScores.txt");
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()){
+                String line = scanner.nextLine();
+                System.out.println(line);
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeFile(){
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("HighScores.txt",true));
+            writer.newLine();
+            writer.write(currHero.getHighScore());
+            System.out.println("Saved");
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

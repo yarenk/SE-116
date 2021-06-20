@@ -14,7 +14,9 @@ public final class IO {
         System.out.println();
         System.out.println(" 1.      Start Game        ");
         System.out.println();
-        System.out.println(" 2.       Credits        ");
+        System.out.println(" 2.       High Scores        ");
+        System.out.println();
+        System.out.println(" 3.       Credits        ");
         System.out.println();
         System.out.println(" 3.     Exit Game        ");
         System.out.println();
@@ -137,7 +139,10 @@ public final class IO {
             }
         }
         if (!hero.isAlive()) {
+            hero.setHighScore(hero.calculateValue() + hero.getNumberOfTownPeopleSaved());
+            System.out.println("High Score: " + hero.getHighScore());
             System.out.println("Your lifeless body hits the floor.  GAME OVER");
+            Game.writeFile();
         } else if (!monster.isAlive()) {
             SecureRandom rand = new SecureRandom();
             int random = rand.nextInt(2);
@@ -154,17 +159,6 @@ public final class IO {
             System.out.println("The monster has been defeated!");
             System.out.println("--------------------------------\n");
 
-            ArrayList<Inventory> loot = new ArrayList<>();
-            loot.add(monster.getInventory());
-            loot.add(Rooms.newRoomInstance().getInventory());
-            for (Inventory temp : loot) {
-                temp.printItems();
-            }
-            System.out.println("What items do you want to take?");
-            int i = 0;
-            while (!Game.USERINPUT.nextLine().equals("none")){
-
-            }
 
         }
 // LOOT AŞAMALARI YAPILACAK ENVANTER DEĞİŞİMİ VS.
@@ -179,6 +173,8 @@ public final class IO {
         System.out.println("You hit the " + monster.getName()
                 + " for " + damage + " damage.");
     }
+
+
 
 
 }

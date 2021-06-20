@@ -2,7 +2,6 @@ package HeroOfTheDungeon;
 
 public class Inventory {
     private Item[] items;
-    private final int maxCapacity = 100;
     private int curCapacity;
 
     public Inventory() {
@@ -12,7 +11,7 @@ public class Inventory {
 
 
     public int getMaxCapacity() {
-        return maxCapacity;
+        return 100;
     }
 
     public int getCurCapacity() {
@@ -23,6 +22,14 @@ public class Inventory {
         if (curCapacity > 100)
             throw new ArithmeticException("Capacity must be <= 100");
         this.curCapacity = curCapacity;
+    }
+
+    public int calculateItemsValue() {
+        int value = 0;
+        for (Item item : items) {
+            value += item.getValue();
+        }
+        return value;
     }
 
     public void add(Item item) {
@@ -47,89 +54,19 @@ public class Inventory {
     }
 
 
-    public void remove(Item item) {
-        for(int i = 0; i < items.length; i++) {
-            if(item == items[i]) {
-                items[i] = null;
-                return;
-            }
-            setCurCapacity(getCurCapacity() - item.getWeight());
-        }
-
-    }
-
-    public Item remove(String itemName) {
-        // If they passed null, exit
-        if(itemName == null) {
-            return null;
-        }
-
-        // For each item in the room
-        for(int i = 0; i < items.length; i++) {
-            Item item = items[i];
-            // If it's null, don't bother checking and
-            // move on to the next item in the array
-            if(item == null) {
+    public void printItems() {
+        for (Item item : items) {
+            if (item == null) {
                 continue;
             }
-            // If it's the same name, remove it
-            if(itemName.equalsIgnoreCase(item.getName())) {
-                items[i] = null;
-                return item;
-            }
-        }
-
-        return null;
-    }
-
-    public boolean contains(Item item) {
-        if(item == null) {
-            return false;
-        }
-        for(int i = 0; i < items.length; i++) {
-            if(item == items[i]) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean contains(String itemName) {
-        if(itemName == null) {
-            return false;
-        }
-
-        for(int i = 0; i < items.length; i++) {
-            Item item = items[i];
-            if(item == null) {
-                continue;
-            }if(itemName.equalsIgnoreCase(item.getName())) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
-    public void printItems(String outputFormatString) {
-        // For each item
-        for(int i = 0; i < items.length; i++) {
-            Item item = items[i];
-            // If it's null, don't bother printing and
-            // move onto the next item in the array
-            if(item == null) {
-                continue;
-            }
-            // Print the item
             String itemName = item.getName();
-            System.out.printf(outputFormatString, itemName);
+            System.out.println(itemName);
         }
     }
 
     public boolean isEmpty() {
-        for(int i = 0; i < items.length; i++) {
-            if(items[i] != null) {
+        for (Item item : items) {
+            if (item != null) {
                 return false;
             }
         }
