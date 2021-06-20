@@ -185,6 +185,53 @@ public final class IO {
         }
     }
 
+    public static void changeEquipments(Hero hero) {
+        System.out.println("<<<YOUR INVENTORY>>>");
+        if (hero.getInventory().isEmpty())
+            hero.getInventory().printItems();
+        System.out.println();
+
+        System.out.println("Do you want to change the weapon you are using?(y/n)");
+        String answer = Game.USERINPUT.nextLine();
+        if (answer.equals("y")) {
+            System.out.println("Which weapon you want to use in your inventory?");
+            String tempWeaponName = Game.USERINPUT.nextLine();
+            for (int i = 0; i < hero.getInventory().getItems().size(); i++) {
+                if (hero.getInventory().getItems().get(i).getName().equals(tempWeaponName)) {
+                    hero.setWeapon((Weapons) hero.getInventory().getItems().get(i));
+                }
+            }
+        }
+        else if (answer.equals("n")) {
+            System.out.println("Your weapon has not been modified.");
+        }
+        else {
+            System.out.println("You entered invalid answer.");
+        }
+
+
+
+        System.out.println();
+        System.out.println("Do you want to change the clothing you wear?(y/n)");
+        String answer2 = Game.USERINPUT.nextLine();
+        if (answer2.equals("y")) {
+            System.out.println("Which clothing you want to wear in your inventory?");
+            String tempClothingName = Game.USERINPUT.nextLine();
+            for (int i = 0; i < hero.getInventory().getItems().size(); i++) {
+                if (hero.getInventory().getItems().get(i).getName().equals(tempClothingName)) {
+                    hero.setClothing((Clothings) hero.getInventory().getItems().get(i));
+                }
+            }
+        }
+        else if (answer.equals("n")) {
+            System.out.println("Your clothing has not been modified.");
+        }
+        else {
+            System.out.println("You entered invalid answer.");
+        }
+
+    }
+
     public static void loot(Hero hero, Monster monster) {
 
         Inventory lootInventory = new Inventory();
@@ -196,7 +243,6 @@ public final class IO {
         for (int i = 0; i < hero.getCurrRoom().getInventory().getItems().size(); i++) {
             lootInventory.add(hero.getCurrRoom().getInventory().getItems().get(i));
         }
-
 
 
         System.out.println("<<<YOUR INVENTORY>>>");
@@ -238,6 +284,8 @@ public final class IO {
                 }
             }
         }
+
+        changeEquipments(hero);
 
     }
 

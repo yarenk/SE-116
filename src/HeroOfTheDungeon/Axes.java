@@ -21,14 +21,14 @@ public class Axes extends Weapons{
 
 
     public static Axes newWeakAxe() {
-        return new Axes("Hand Axe",1,2,2,2,"Small Axe");
+        return new Axes("Hand Axe",1,2,3,3,"Small Axe");
     }
 
     public static Axes newAxe() {
-        return new Axes("Battle Axe",2,4,3,5,"Axe");
+        return new Axes("Battle Axe",2,4,4,6,"Axe");
     }
 
     public static Axes newEpicAxe() {
-        return new Axes("Great Axe",4,8,4,8,"Broad Axe");
+        return new Axes("Great Axe",4,8,5,9,"Broad Axe");
     }
 }

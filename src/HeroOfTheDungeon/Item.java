@@ -39,23 +39,23 @@ public class Item {
     }
 
     public static Item newCopper() {
-        return new Item("Copper",1,5);
+        return new Item("Copper",1,10);
     }
 
     public static Item newSilver() {
-        return new Item("Silver",1,10);
+        return new Item("Silver",1,50);
     }
 
     public static Item newGold() {
-        return new Item("Gold",1,30);
+        return new Item("Gold",1,100);
     }
 
     public static Item newPlatinum() {
-        return new Item("Platinum",1,50);
+        return new Item("Platinum",1,500);
     }
 
     public static Item newDiamond() {
-        return new Item("Diamond",1,100);
+        return new Item("Diamond",1,1000);
     }
 
     public String getName() {

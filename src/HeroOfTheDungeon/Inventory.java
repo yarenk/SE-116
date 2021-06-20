@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Inventory {
     private ArrayList<Item> items;
-    private final int maxCapacity = 2;
+    private final int maxCapacity = 100;
     private int curCapacity;
 
     public Inventory(ArrayList<Item> items) {

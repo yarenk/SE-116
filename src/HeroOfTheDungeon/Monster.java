@@ -73,77 +73,40 @@ public class Monster implements BattleMethods{
     }
 
 
-
-    /*public static Monster newRandomMonster() {
-        int random = rand.nextInt(9) + 1;
-        Monster monster = null;
-        switch (random) {
-            case 1:
-                monster = newRaptor();
-                break;
-            case 2:
-                monster = newMiniKrug();
-                break;
-            case 3:
-                monster = newMurkWolf();
-                break;
-            case 4:
-                monster = newGhoul();
-                break;
-            case 5:
-                monster = newGromp();
-                break;
-            case 6:
-                monster = newRiftHerald();
-                break;
-            case 7:
-                monster = newInfernalDrake();
-                break;
-            case 8:
-                monster = newBaronNashor();
-                break;
-            case 9:
-                monster = newElderDragon();
-                break;
-        }
-
-        return monster;
-    }*/
-
     public static Monster newRaptor() {
-        return new Monster("Raptor",20,Swords.newWeakSword(),Clothings.newLightArmor(),Inventory.newInventory());
+        return new Monster("Raptor",50,Swords.newWeakSword(),Clothings.newLightArmor(),Inventory.newInventory());
     }
 
     public static Monster newMiniKrug() {
-        return new Monster("Mini Krug",25,Axes.newWeakAxe(),Clothings.newLightArmor(),Inventory.newInventory());
+        return new Monster("Mini Krug",60,Axes.newWeakAxe(),Clothings.newLightArmor(),Inventory.newInventory());
     }
 
     public static Monster newMurkWolf() {
-        return new Monster("Murk Wolf",30,Bows.newWeakBow(),Clothings.newLightArmor(),Inventory.newInventory());
+        return new Monster("Murk Wolf",70,Bows.newWeakBow(),Clothings.newLightArmor(),Inventory.newInventory());
     }
 
     public static Monster newGhoul() {
-        return new Monster("Ghoul",35,Swords.newSword(),Clothings.newMediumArmor(),Inventory.newInventory());
+        return new Monster("Ghoul",80,Swords.newSword(),Clothings.newMediumArmor(),Inventory.newInventory());
     }
 
     public static Monster newGromp() {
-        return new Monster("Gromp",40,Axes.newAxe(),Clothings.newMediumArmor(),Inventory.newInventory());
+        return new Monster("Gromp",90,Axes.newAxe(),Clothings.newMediumArmor(),Inventory.newInventory());
     }
 
     public static Monster newRiftHerald() {
-        return new Monster("Rift Herald",45,Bows.newBow(),Clothings.newMediumArmor(), Inventory.newInventory());
+        return new Monster("Rift Herald",100,Bows.newBow(),Clothings.newMediumArmor(), Inventory.newInventory());
     }
 
     public static Monster newInfernalDrake() {
-        return new Monster("Infernal Drake",50,Swords.newEpicSword(),Clothings.newHeavyArmor(),Inventory.newInventory());
+        return new Monster("Infernal Drake",110,Swords.newEpicSword(),Clothings.newHeavyArmor(),Inventory.newInventory());
     }
 
     public static Monster newBaronNashor() {
-        return new Monster("Baron Nashor",55,Axes.newEpicAxe(),Clothings.newHeavyArmor(),Inventory.newInventory());
+        return new Monster("Baron Nashor",120,Axes.newEpicAxe(),Clothings.newHeavyArmor(),Inventory.newInventory());
     }
 
     public static Monster newElderDragon() {
-        return new Monster("Elder Dragon",60,Bows.newEpicBow(),Clothings.newHeavyArmor(),Inventory.newInventory());
+        return new Monster("Elder Dragon",130,Bows.newEpicBow(),Clothings.newHeavyArmor(),Inventory.newInventory());
     }
 
     @Override
