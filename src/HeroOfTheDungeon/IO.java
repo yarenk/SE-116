@@ -219,7 +219,6 @@ public final class IO {
                         hero.getInventory().getItems().remove(hero.getInventory().getItems().get(i));
                     }
                 }
-                System.out.println("You do not have this item.");
             }
         }
 
@@ -236,7 +235,6 @@ public final class IO {
                         hero.getInventory().getItems().add(lootInventory.getItems().get(i));
                     }
                 }
-                System.out.println("The item is not available.");
             }
         }
 

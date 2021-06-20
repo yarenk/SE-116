@@ -89,7 +89,7 @@ public class Game {
             BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\EMRE\\IdeaProjects\\SE-116\\HighScore.txt",true));
             writer.newLine();
             writer.write(String.valueOf(currHero.getHighScore()));
-            System.out.println("Saved");
+            System.out.println("Your HighScore is saved.");
             writer.close();
 
         } catch (IOException e) {

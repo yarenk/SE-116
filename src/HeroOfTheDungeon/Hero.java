@@ -45,7 +45,12 @@ public class Hero implements BattleMethods{
     }
 
     public int calculateValue() {
-        return weapon.getValue() + clothing.getValue();
+        int value = 0;
+        for (int i = 0 ; i < inventory.getItems().size(); i++) {
+            value += inventory.getItems().get(i).getValue();
+        }
+        value += getNumberOfTownPeopleSaved();
+        return value;
     }
 
     @Override

@@ -4,13 +4,12 @@ import java.util.ArrayList;
 
 
 public class Inventory {
-    private static ArrayList<Item> items;
+    private ArrayList<Item> items;
     private final int maxCapacity = 100;
     private int curCapacity;
 
-    public Inventory(ArrayList<Item> items, int curCapacity) {
+    public Inventory(ArrayList<Item> items) {
         this.items = items;
-        this.curCapacity = curCapacity;
     }
 
     public Inventory() {
