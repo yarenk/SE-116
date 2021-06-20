@@ -152,7 +152,7 @@ public final class IO {
             System.out.println("----------------------------------");
             System.out.print("\nAttack (a)");
             String action = Game.USERINPUT.nextLine();
-            if (action.equals("a")) {
+            if (action.toLowerCase().equals("a")) {
                 monster.defend(hero);
                 if (monster.isAlive()) {
                     hero.defend(monster);
@@ -191,16 +191,16 @@ public final class IO {
 
         System.out.println("Do you want to change the weapon you are using?(y/n)");
         String answer = Game.USERINPUT.nextLine();
-        if (answer.equals("y")) {
+        if (answer.toLowerCase().equals.("y")) {
             System.out.println("Which weapon you want to use in your inventory?");
             String tempWeaponName = Game.USERINPUT.nextLine();
             for (int i = 0; i < hero.getInventory().getItems().size(); i++) {
-                if (hero.getInventory().getItems().get(i).getName().equals(tempWeaponName)) {
+                if (hero.getInventory().getItems().get(i).getName().toLowerCase().equals(tempWeaponName.toLowerCase())) {
                     hero.setWeapon((Weapons) hero.getInventory().getItems().get(i));
                 }
             }
         }
-        else if (answer.equals("n")) {
+        else if (answer.toLowerCase()equals("n")) {
             System.out.println("Your weapon has not been modified.");
         }
         else {
@@ -212,16 +212,16 @@ public final class IO {
         System.out.println();
         System.out.println("Do you want to change the clothing you wear?(y/n)");
         String answer2 = Game.USERINPUT.nextLine();
-        if (answer2.equals("y")) {
+        if (answer2.toLowerCase().equals("y")) {
             System.out.println("Which clothing you want to wear in your inventory?");
             String tempClothingName = Game.USERINPUT.nextLine();
             for (int i = 0; i < hero.getInventory().getItems().size(); i++) {
-                if (hero.getInventory().getItems().get(i).getName().equals(tempClothingName)) {
+                if (hero.getInventory().getItems().get(i).getName().toLowerCase().equals(tempClothingName.toLowerCase())) {
                     hero.setClothing((Clothings) hero.getInventory().getItems().get(i));
                 }
             }
         }
-        else if (answer.equals("n")) {
+        else if (answer.toLowerCase().equals("n")) {
             System.out.println("Your clothing has not been modified.");
         }
         else {
@@ -252,15 +252,15 @@ public final class IO {
             lootInventory.printItems();
         System.out.println();
         String answer = "";
-        while (!answer.equals("n")) {
+        while (!answer.toLowerCase().equals("n")) {
             System.out.println("If are there any items you want to drop them? (y/n)");
             answer = Game.USERINPUT.nextLine();
-            if (answer.equals("y")) {
+            if (answer.toLowerCase().equals("y")) {
                 System.out.println("Which item do you want to drop?");
                 System.out.println("Enter the name of item:");
                 String nameOfItem = Game.USERINPUT.nextLine();
                 for (int i = 0; i < hero.getInventory().getItems().size(); i++) {
-                    if (nameOfItem.equals(hero.getInventory().getItems().get(i).getName())) {
+                    if (nameOfItem.toLowerCase().equals(hero.getInventory().getItems().get(i).getName().toLowerCase())) {
                         hero.getInventory().getItems().remove(hero.getInventory().getItems().get(i));
                         System.out.println("You have removed the item from your inventory.");
                     }
@@ -269,15 +269,15 @@ public final class IO {
         }
 
         String choice = "";
-        while (!choice.equals("n")) {
+        while (!choice.toLowerCase().equals("n")) {
             System.out.println("If are there any items you want to pick them up? (y/n)");
             choice = Game.USERINPUT.nextLine();
-            if (choice.equals("y")) {
+            if (choice.toLowerCase().equals("y")) {
                 System.out.println("Which item do you want to pick?");
                 System.out.println("Enter the name of item:");
                 String nameOfItem = Game.USERINPUT.nextLine();
                 for (int i = 0; i < lootInventory.getItems().size(); i++) {
-                    if (nameOfItem.equals(lootInventory.getItems().get(i).getName())) {
+                    if (nameOfItem.toLowerCase().equals(lootInventory.getItems().get(i).getName().toLowerCase())) {
                         hero.getInventory().getItems().add(lootInventory.getItems().get(i));
                         System.out.println("You have added the item to your inventory.");
                     }
