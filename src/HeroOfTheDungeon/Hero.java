@@ -33,15 +33,15 @@ public class Hero implements BattleMethods{
     }
 
     public static Hero newWarrior() {
-        return new Hero("Warrior", "You start with a weak weapon but with a high health value.", 150, 110, Swords.newWeakSword(), Clothings.newLightArmor(), Inventory.newInventory());
+        return new Hero("Warrior", "You start with a weak weapon but with a high health value.", 150, 110, Swords.newWeakSword(), Clothings.newLightArmor(), new Inventory());
     }
 
     public static Hero newDuelist() {
-        return new Hero("Duelist", "You start with a balanced weapon and health value.", 150, 100, Axes.newWeakAxe(), Clothings.newLightArmor(), Inventory.newInventory());
+        return new Hero("Duelist", "You start with a balanced weapon and health value.", 150, 100, Axes.newWeakAxe(), Clothings.newLightArmor(), new Inventory());
     }
 
     public static Hero newNinja() {
-        return new Hero("Ninja","You start with a powerful weapon and low health to begin with.",150,90,Bows.newWeakBow(),Clothings.newLightArmor(), Inventory.newInventory());
+        return new Hero("Ninja","You start with a powerful weapon and low health to begin with.",150,90,Bows.newWeakBow(),Clothings.newLightArmor(), new Inventory());
     }
 
     public int calculateValue() {

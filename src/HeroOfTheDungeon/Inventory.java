@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Inventory {
     private ArrayList<Item> items;
-    private final int maxCapacity = 100;
+    private final int maxCapacity = 2;
     private int curCapacity;
 
     public Inventory(ArrayList<Item> items) {
@@ -42,10 +42,8 @@ public class Inventory {
     public void add(Item item) {
 
         try {
-            if ((getCurCapacity() + item.getWeight()) <= getMaxCapacity()) {
-                items.add(item);
-                setCurCapacity(item.getWeight() + getCurCapacity());
-            }
+            setCurCapacity(item.getWeight() + getCurCapacity());
+            if ((getCurCapacity() + item.getWeight()) <= getMaxCapacity()) items.add(item);
         } catch (ArithmeticException e) {
             printItems();
         }

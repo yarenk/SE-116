@@ -198,6 +198,7 @@ public final class IO {
         }
 
 
+
         System.out.println("<<<YOUR INVENTORY>>>");
         if (hero.getInventory().isEmpty())
             hero.getInventory().printItems();
